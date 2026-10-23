@@ -306,5 +306,8 @@
     const msg = $('[data-form-msg]', f); msg.hidden = false; msg.focus?.();
   }));
 
+  // French typography: thin space before % in the payment steps
+  if (lang === 'fr') $$('.pay__steps b, .pay__steps i').forEach(el => { el.textContent = el.textContent.replace(/(\d)%/g, '$1\u202f%'); });
+
   onScroll();
 })();

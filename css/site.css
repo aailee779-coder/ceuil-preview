@@ -88,6 +88,7 @@ section{position:relative}
 .hero__still img{width:100%;height:100%;object-fit:cover}
 .hero__scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(0deg,rgba(14,13,12,.85) 0%,rgba(14,13,12,.35) 34%,rgba(14,13,12,0) 60%),linear-gradient(90deg,rgba(14,13,12,.72) 0%,rgba(14,13,12,.4) 34%,rgba(14,13,12,0) 58%),linear-gradient(180deg,rgba(14,13,12,.5) 0%,rgba(14,13,12,0) 18%)}
 .hero__copy{position:relative;z-index:3;padding-bottom:clamp(56px,10vh,110px)}
+.hero .eyebrow{color:var(--sand);text-shadow:0 1px 12px rgba(0,0,0,.6)}
 .hero__line{font-size:clamp(17px,1.6vw,22px);color:var(--sand);max-width:30em;margin:20px 0 30px}
 .hero__ctas{display:flex;gap:12px;flex-wrap:wrap}
 .hero__cap{position:absolute;z-index:3;right:var(--gutter);bottom:14px;margin:0;font-size:11px}
@@ -351,6 +352,9 @@ section{position:relative}
   .pay__steps{grid-template-columns:1fr 1fr}
   .loc__list{grid-template-columns:1fr 1fr}
   .form__row{grid-template-columns:1fr}
+  [data-plan-types]{flex-wrap:nowrap;overflow-x:auto;max-width:100%}
+  [data-plan-types] button{white-space:nowrap}
+  .plans,.pay,.estate,.specs,.loc,.faq{padding-bottom:96px}
   .fcta{padding:11px 16px;font-size:13px}
   .fcta__long{display:none}.fcta__short{display:inline}
   .wordmark{letter-spacing:.38em}
