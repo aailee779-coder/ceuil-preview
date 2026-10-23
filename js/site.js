@@ -190,7 +190,7 @@
       const f = nearest(k);
       if (f < 0 || f === current) return;
       const im = frames[f], cw = canvas.width, ch = canvas.height;
-      const s = mode === 'seq' ? Math.max(cw / im.width, ch / im.height) : Math.min(cw / im.width, ch / im.height) * (small() ? 1.3 : 1.08);  // the render has generous white margins
+      const s = Math.min(cw / im.width, ch / im.height);  // original framing: never cropped or zoomed
       const w = im.width * s, h = im.height * s;
       ctx.clearRect(0, 0, cw, ch); ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
       current = f; sec.classList.add('is-ready');
@@ -247,7 +247,7 @@
       p.addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return; const nx = pills[(k + d + pills.length) % pills.length]; nx.focus(); set(nx.dataset.pvPill); });
     });
     // swipe on the image
-    const media = $('.pv__media', pv); let x0 = null;
+    const media = $('.pv__frame', pv); let x0 = null;
     media.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
     media.addEventListener('touchend', e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(dx) < 40) return; const k = pills.findIndex(p => p.dataset.pvPill === cur); set(pills[(k + (dx < 0 ? 1 : -1) + pills.length) % pills.length].dataset.pvPill); });
   });
@@ -347,14 +347,14 @@
     const pts = $$('[data-loc-pts] li', loc);
     // positions in map-image coordinates (0..1), after the developer's location plan (brochure p.3); illustrative
     const POS = {
-      d: { you: [0.505, 0.60], hotel: [0.41, 0.52], airport: [0.25, 0.37], jemaa: [0.478, 0.175], station: [0.37, 0.12] },
-      m: { you: [0.525, 0.60], hotel: [0.40, 0.53], airport: [0.26, 0.33], jemaa: [0.525, 0.17], station: [0.40, 0.115] }
+      d: { you: [0.505, 0.60], hotel: [0.41, 0.52], airport: [0.25, 0.37], jemaa: [0.478, 0.175], station: [0.37, 0.145] },
+      m: { you: [0.525, 0.60], hotel: [0.40, 0.53], airport: [0.26, 0.33], jemaa: [0.525, 0.17], station: [0.40, 0.14] }
     };
     const place = () => {
       const bw = box.clientWidth, bh = box.clientHeight;
       const portrait = small();
       const iw = portrait ? 1200 : 2400, ih = portrait ? 1800 : 1600;
-      const s = Math.max(bw / iw, bh / ih), dw = iw * s, dh = ih * s, ox = (bw - dw) / 2, oy = (bh - dh) * 0.3;  // matches object-position 50% 30%
+      const s = Math.max(bw / iw, bh / ih), dw = iw * s, dh = ih * s, ox = (bw - dw) / 2, oy = (bh - dh) / 2;
       const P = portrait ? POS.m : POS.d;
       const at = k => [((ox + P[k][0] * dw) / bw) * 100, ((oy + P[k][1] * dh) / bh) * 100];
       pts.forEach(li => { const [x, y] = at(li.dataset.key); li.style.setProperty('--x', x + '%'); li.style.setProperty('--y', y + '%'); li.classList.toggle('is-left', x > 60 && li.dataset.key !== 'you'); });
