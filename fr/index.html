@@ -23,7 +23,7 @@
 <link rel="icon" href="/ceuil-preview/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/ceuil-preview/css/site.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"RealEstateListing","name":"Ceuil Private Residence","description":"11 villas privées au Km 5, route de Tahanaout, Marrakech. Piscine privée, hammam, cuisine Liebherr, Lussy Health Center. Livraison d'ici mai 2028.","inLanguage":"fr","url":"https://aailee779-coder.github.io/ceuil-preview/fr/","image":"https://aailee779-coder.github.io/ceuil-preview/img/og-fr.jpg",
@@ -34,66 +34,57 @@
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="gnav" data-gnav>
   <div class="gnav__in">
-    <a class="wordmark" href="/ceuil-preview/fr/#top" aria-label="Ceuil Private Residence, accueil">C<span>E</span>U<span>I</span>L</a>
-    <span class="badge">Aperçu · non public</span>
+    <a class="wordmark" href="/ceuil-preview/fr/#top" aria-label="Ceuil Private Residence, accueil"><span class="wordmark__c">CEUIL</span><span class="wordmark__s">Private Residence</span></a>
     <a class="lang" href="/ceuil-preview/en/" hreflang="en" lang="en" title="English">EN</a>
+    <a class="btn btn--gold btn--sm gnav__cta" href="#visit">Manifester votre intérêt</a>
   </div>
 </header>
-<nav class="lnav" data-lnav aria-label="Ceuil Private Residence">
-  <div class="lnav__in">
-    <a class="lnav__title" href="#top">Ceuil Private Residence</a>
-    <ul class="lnav__links">
-      <li><a href="#villa">Villa</a></li>
-      <li><a href="#plans">Plans</a></li>
-      <li><a href="#estate">Bien-être</a></li>
-      <li><a href="#location">Situation</a></li>
-      <li><a href="#payment">Paiement</a></li>
-    </ul>
-    <a class="btn btn--sm" href="#visit">Contact</a>
-    <button class="lnav__burger" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>Menu</button>
-  </div>
-</nav>
-<div class="menu" id="menu" hidden data-menu>
-  <button class="menu__close" type="button" data-menu-close>Fermer</button>
-  <ul>
-    <li><a href="#villa">Villa</a></li>
-    <li><a href="#plans">Plans</a></li>
-    <li><a href="#estate">Bien-être</a></li>
-    <li><a href="#location">Situation</a></li>
-    <li><a href="#payment">Paiement</a></li>
-    <li><a href="#visit">Contact</a></li>
-  </ul>
-  <a class="menu__lang" href="/ceuil-preview/en/" hreflang="en">English</a>
-</div>
 
 <main id="main">
-<!-- 1 · HERO: the film, full width at its original 16:9 framing -->
+<!-- 1 · HERO: full-screen film, centred spaced capitals, three facts, one gold CTA -->
 <section class="hero" id="top" aria-label="Ceuil Private Residence" data-hero>
   <div class="hero__media">
     <video class="hero__film" autoplay muted loop playsinline preload="metadata" poster="/ceuil-preview/media/hero-poster.jpg" data-hero-film aria-hidden="true">
+      <source media="(max-width: 699px)" src="/ceuil-preview/media/hero-portrait.mp4" type="video/mp4">
       <source media="(max-width: 1100px)" src="/ceuil-preview/media/hero-720.mp4" type="video/mp4">
       <source src="/ceuil-preview/media/hero-1080.webm" type="video/webm">
       <source src="/ceuil-preview/media/hero-1080.mp4" type="video/mp4">
     </video>
-    <img class="hero__still" src="/ceuil-preview/media/hero-poster.jpg" alt="Villa Type 2, Ceuil Private Residence, perspective d'artiste" width="1920" height="1080" fetchpriority="high">
+    <picture class="hero__still"><source media="(max-width: 699px)" srcset="/ceuil-preview/media/hero-poster-portrait.jpg"><img src="/ceuil-preview/media/hero-poster.jpg" alt="Villa Type 2, Ceuil Private Residence, perspective d'artiste" width="1920" height="1080" fetchpriority="high"></picture>
     <div class="hero__scrim" aria-hidden="true"></div>
-    <button class="hero__toggle" type="button" data-film-toggle aria-pressed="false"><span data-label-pause>Mettre le film en pause</span><span data-label-play hidden>Lire le film</span></button>
   </div>
   <div class="hero__copy wrap">
-    <p class="eyebrow" data-split-fade>Ceuil Private Residence</p>
-    <h1 class="display" data-split>Luxe et intimité<br><em>au cœur de Marrakech.</em></h1>
-    <p class="hero__line" data-split-fade>11 villas privées · Km 5, route de Tahanaout, Marrakech</p>
-    <div class="hero__ctas" data-split-fade>
-      <a class="btn" href="#visit">Réserver une visite privée</a>
-      <a class="btn btn--glass" href="#location">Voir l'emplacement</a>
-    </div>
+    <h1 class="display" data-split>Luxe et intimité<br>au cœur de Marrakech</h1>
+    <ul class="hero__facts">
+      <li><small>Villas privées</small><b>11 seulement</b></li>
+      <li><small>Emplacement</small><b>Km 5, route de Tahanaout</b></li>
+      <li><small>Livraison</small><b>Mai 2028</b></li>
+    </ul>
+    <a class="btn btn--gold btn--lg" href="#visit">Manifester votre intérêt</a>
   </div>
-  <ul class="hero__facts wrap" aria-label="Ceuil Private Residence">
-    <li><b data-count="11">11</b><span>Villas privées</span></li>
-    <li><b>563–945<small> m²</small></b><span>Surface bâtie¹</span></li>
-    <li><b>Km 5</b><span>Route de Tahanaout</span></li>
-    <li><b>Mai 2028</b><span>Livraison¹</span></li>
-  </ul>
+  <button class="hero__toggle" type="button" data-film-toggle aria-pressed="false"><span data-label-pause>Mettre le film en pause</span><span data-label-play hidden>Lire le film</span></button>
+</section>
+
+<!-- 2 · WHY CEUIL -->
+<section class="why" aria-labelledby="why-t">
+  <div class="wrap wrap--narrow center">
+    <h2 class="h2" id="why-t" data-split-fade>Pourquoi Ceuil ?</h2>
+    <p class="copy" data-split-fade>Onze villas privées dans un domaine sécurisé, au km 5 de la route de Tahanaout. Chacune avec son jardin, sa piscine avec jacuzzi et son hammam, un portail de 7 mètres et 8 mètres sous plafond. Autour : le Lussy Health Center, la conciergerie, le room service du café, deux gardiens à plein temps et 13 golfs à moins de 20 km.</p>
+    <div class="cta-row" data-split-fade><a class="btn btn--gold" href="#visit">Manifester votre intérêt</a></div>
+  </div>
+</section>
+
+<!-- 3 · KEY FIGURES -->
+<section class="figs" aria-labelledby="figs-t">
+  <div class="wrap center">
+    <h2 class="h2" id="figs-t" data-split-fade>Chiffres clés</h2>
+    <ul class="figs__row" data-split-fade>
+      <li><b data-count="11">11</b><span>Villas privées</span></li>
+      <li><b>945<small> m²</small></b><span>Plus grande surface bâtie¹</span></li>
+      <li><b data-count="13">13</b><span>Golfs à moins de 20 km</span></li>
+      <li><b>2028</b><span>Livraison, mai¹</span></li>
+    </ul>
+  </div>
 </section>
 
 <!-- 3 · THE ESTATE TAKES SHAPE: aerial film scrubbed by scroll -->
@@ -115,20 +106,61 @@
   </div>
 </section>
 
-<!-- 4 · HIGHLIGHTS -->
-<section class="hl" aria-labelledby="hl-t" data-gal>
-  <div class="wrap"><h2 class="h2" id="hl-t" data-split>L'<em>essentiel.</em></h2></div>
-  <div class="hl__track" data-gal-track tabindex="0" aria-roledescription="carousel">
-    <figure class="hl__slide tile" data-gal-slide><picture><img src="/ceuil-preview/img/estate-aerial-1600.webp" srcset="/ceuil-preview/img/estate-aerial-800.webp 800w, /ceuil-preview/img/estate-aerial-1600.webp 1600w, /ceuil-preview/img/estate-aerial-2400.webp 2400w" sizes="(max-width: 700px) 88vw, 76vw" width="2400" height="1698" alt="Vue aérienne du domaine Ceuil, perspective d'artiste" loading="lazy" decoding="async"></picture><figcaption>11 villas dans un domaine privé et sécurisé.</figcaption></figure>
-    <figure class="hl__slide tile" data-gal-slide><picture><img src="/ceuil-preview/img/pool-1600.webp" srcset="/ceuil-preview/img/pool-800.webp 800w, /ceuil-preview/img/pool-1600.webp 1600w, /ceuil-preview/img/pool-2400.webp 2400w" sizes="(max-width: 700px) 88vw, 76vw" width="2400" height="1186" alt="Piscine privée et salon en contrebas, perspective d'artiste" loading="lazy" decoding="async"></picture><figcaption>Votre piscine, avec jacuzzi.</figcaption></figure>
-    <figure class="hl__slide tile" data-gal-slide><picture><img src="/ceuil-preview/img/gym-1600.webp" srcset="/ceuil-preview/img/gym-800.webp 800w, /ceuil-preview/img/gym-1600.webp 1600w, /ceuil-preview/img/gym-2400.webp 2400w" sizes="(max-width: 700px) 88vw, 76vw" width="2400" height="1586" alt="Salle de sport et fitness du Lussy Health Center, image d'artiste" loading="lazy" decoding="async"></picture><figcaption>Une salle de sport et un espace fitness.</figcaption></figure>
-    <figure class="hl__slide tile" data-gal-slide><picture><img src="/ceuil-preview/img/hammam-1600.webp" srcset="/ceuil-preview/img/hammam-800.webp 800w, /ceuil-preview/img/hammam-1600.webp 1600w, /ceuil-preview/img/hammam-2400.webp 2400w" sizes="(max-width: 700px) 88vw, 76vw" width="2400" height="1186" alt="Hammam privé avec niches voûtées, image d'artiste" loading="lazy" decoding="async"></picture><figcaption>Un hammam privé dans chaque villa.</figcaption></figure>
-    <figure class="hl__slide tile" data-gal-slide><picture><img src="/ceuil-preview/img/padel-1600.webp" srcset="/ceuil-preview/img/padel-800.webp 800w, /ceuil-preview/img/padel-1600.webp 1600w, /ceuil-preview/img/padel-2400.webp 2400w" sizes="(max-width: 700px) 88vw, 76vw" width="2400" height="2500" alt="Terrain de padel face à l'Atlas, perspective d'artiste" loading="lazy" decoding="async"></picture><figcaption>Le padel, face à l'Atlas.</figcaption></figure>
+<!-- 4 · EXPLORE: project cards (grid on desktop, swipe + dots on phones) -->
+<section class="explore" id="estate" aria-labelledby="ex-t" data-gal>
+  <div class="wrap center">
+    <h2 class="h2" id="ex-t" data-split-fade>Découvrir la résidence</h2>
+    <p class="copy" data-split-fade>L'essentiel, en neuf images.</p>
   </div>
-  <div class="wrap hl__ctrl">
-    <div class="dots" data-gal-dots role="tablist"></div>
-    <button class="round-btn" type="button" data-gal-toggle aria-pressed="false"><span data-label-pause aria-label="Pause">❚❚</span><span data-label-play hidden aria-label="Lecture">▶</span></button>
+  <div class="explore__grid wrap" data-gal-track tabindex="0" aria-roledescription="carousel">
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/type2-front-1600.webp" srcset="/ceuil-preview/img/type2-front-800.webp 800w, /ceuil-preview/img/type2-front-1600.webp 1600w, /ceuil-preview/img/type2-front-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1989" alt="Façade de la villa Type 2, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Les villas</h3><p>Cinq types, de 563 à 945 m². Piscine privée, jacuzzi et hammam dans chacune.¹</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/gate-1600.webp" srcset="/ceuil-preview/img/gate-800.webp 800w, /ceuil-preview/img/gate-1600.webp 1600w, /ceuil-preview/img/gate-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1600" alt="Portail en noyer de 7 mètres, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Entrée de 7 mètres</h3><p>Un portail monumental pour chaque villa, puis un hall de 8 mètres de haut.</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/skyview-1600.webp" srcset="/ceuil-preview/img/skyview-800.webp 800w, /ceuil-preview/img/skyview-1600.webp 1600w, /ceuil-preview/img/skyview-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1600" alt="Salon avec le toit ouvert sur le ciel, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Option SkyView</h3><p>Un toit rétractable au-dessus du salon, pour vivre en plein air.</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/kitchen-lb-1600.webp" srcset="/ceuil-preview/img/kitchen-lb-800.webp 800w, /ceuil-preview/img/kitchen-lb-1600.webp 1600w, /ceuil-preview/img/kitchen-lb-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1408" alt="Cuisine avec îlot en marbre et électroménager Liebherr, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Cuisine Liebherr</h3><p>Chaque villa est livrée avec une cuisine entièrement équipée Liebherr.</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/gym-1600.webp" srcset="/ceuil-preview/img/gym-800.webp 800w, /ceuil-preview/img/gym-1600.webp 1600w, /ceuil-preview/img/gym-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1586" alt="Salle de sport du Lussy Health Center, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Lussy Health Center</h3><p>500 m² de bien-être et fitness réservés aux femmes, et une salle de sport hommes de 100 m².</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/lussy-longevity-1600.webp" srcset="/ceuil-preview/img/lussy-longevity-800.webp 800w, /ceuil-preview/img/lussy-longevity-1600.webp 1600w" sizes="(max-width: 700px) 84vw, 380px" width="1600" height="1074" alt="Centre de longévité du Lussy Health Center, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Centre de longévité</h3><p>Bilan santé, nutrition, médecine préventive, spa et hammam.</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/concierge-1600.webp" srcset="/ceuil-preview/img/concierge-800.webp 800w, /ceuil-preview/img/concierge-1600.webp 1600w, /ceuil-preview/img/concierge-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1600" alt="Salon de conciergerie, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Conciergerie & services</h3><p>Conciergerie, room service du café et de l'épicerie, crèche à côté de la résidence.</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/vito-1600.webp" srcset="/ceuil-preview/img/vito-800.webp 800w, /ceuil-preview/img/vito-1600.webp 1600w, /ceuil-preview/img/vito-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1600" alt="Mercedes-Benz Vito devant une villa, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Mercedes-Benz Vito</h3><p>Un véhicule dédié aux résidents et aux voyageurs Airbnb.</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
+    <article class="pc" data-gal-slide>
+      <div class="pc__img"><picture><img src="/ceuil-preview/img/security-1600.webp" srcset="/ceuil-preview/img/security-800.webp 800w, /ceuil-preview/img/security-1600.webp 1600w, /ceuil-preview/img/security-2400.webp 2400w" sizes="(max-width: 700px) 84vw, 380px" width="2400" height="1600" alt="Entrée gardée du domaine, image d'artiste" loading="lazy" decoding="async"></picture></div>
+      <h3>Sécurité</h3><p>Deux gardiens à plein temps, contrôle d'accès et vidéosurveillance.</p>
+      <a class="btn btn--gold btn--block" href="#visit">Manifester votre intérêt</a>
+    </article>
   </div>
+  <div class="explore__dots"><div class="dots" data-gal-dots role="tablist"></div><button class="round-btn" type="button" data-gal-toggle aria-pressed="false"><span data-label-pause aria-label="Pause">❚❚</span><span data-label-play hidden aria-label="Lecture">▶</span></button></div>
+  <p class="caption wrap center">Les visuels sont des perspectives d'artiste, non contractuelles. Les images sont fournies à titre indicatif.</p>
 </section>
 
 <!-- 5 · 3D TURNTABLE + ARCHITECTURE -->
@@ -158,75 +190,6 @@
   </div>
 </section>
 
-<!-- 5b · ARCHITECTURE -->
-<section class="arch" aria-labelledby="arch-t">
-  <div class="wrap">
-    <p class="eyebrow" data-split-fade>Architecture</p>
-    <h2 class="h2" id="arch-t" data-split>Une entrée <em>qui marque.</em></h2>
-    <div class="arch__grid">
-      <figure class="arch__big tile" data-reveal-tile><picture><img src="/ceuil-preview/img/gate-1600.webp" srcset="/ceuil-preview/img/gate-800.webp 800w, /ceuil-preview/img/gate-1600.webp 1600w, /ceuil-preview/img/gate-2400.webp 2400w" sizes="(max-width: 1000px) 100vw, 60vw" width="2400" height="1600" alt="Portail d'entrée en noyer de 7 mètres, image d'artiste" loading="lazy" decoding="async"></picture><figcaption><b>7 m</b><span>Un portail d'entrée de 7 mètres de haut, pour chaque villa.</span></figcaption></figure>
-      <figure class="arch__sm tile" data-reveal-tile><picture><img src="/ceuil-preview/img/skyview-1600.webp" srcset="/ceuil-preview/img/skyview-800.webp 800w, /ceuil-preview/img/skyview-1600.webp 1600w, /ceuil-preview/img/skyview-2400.webp 2400w" sizes="(max-width: 1000px) 100vw, 40vw" width="2400" height="1600" alt="Salon avec le toit SkyView ouvert sur le ciel, image d'artiste" loading="lazy" decoding="async"></picture><figcaption><b>SkyView</b><span>Toit rétractable en option au-dessus du salon : le plein air quand vous le souhaitez.</span></figcaption></figure>
-      <figure class="arch__sm tile" data-reveal-tile><picture><img src="/ceuil-preview/img/lift-1600.webp" srcset="/ceuil-preview/img/lift-800.webp 800w, /ceuil-preview/img/lift-1600.webp 1600w, /ceuil-preview/img/lift-2400.webp 2400w" sizes="(max-width: 1000px) 100vw, 40vw" width="2400" height="1800" alt="Hall d'entrée avec ascenseur vitré et escalier, image d'artiste" loading="lazy" decoding="async"></picture><figcaption><b>8 m</b><span>8 mètres sous plafond dans le hall et le salon. Ascenseur privé dans les grandes villas.¹</span></figcaption></figure>
-    </div>
-    <p class="caption">Les visuels sont des perspectives d'artiste, non contractuelles. Les images sont fournies à titre indicatif.</p>
-  </div>
-</section>
-
-<!-- 6 · INSIDE -->
-<section class="pv" aria-labelledby="pv-t" data-pv>
-  <div class="wrap">
-    <h2 class="h2" id="pv-t" data-split>L'intérieur.</h2>
-  </div>
-  <div class="pv__stage wrap">
-    <div class="pv__media">
-      <div class="pv__frame tile" data-reveal-tile>
-      <figure class="pv__item is-on" data-pv-item="living"><picture><img src="/ceuil-preview/img/living-1600.webp" srcset="/ceuil-preview/img/living-800.webp 800w, /ceuil-preview/img/living-1600.webp 1600w, /ceuil-preview/img/living-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 70vw" width="2400" height="1186" alt="Séjour double hauteur, ambiance intérieure" loading="lazy" decoding="async"></picture></figure>
-      <figure class="pv__item" data-pv-item="kitchen"><picture><img src="/ceuil-preview/img/kitchen-lb-1600.webp" srcset="/ceuil-preview/img/kitchen-lb-800.webp 800w, /ceuil-preview/img/kitchen-lb-1600.webp 1600w, /ceuil-preview/img/kitchen-lb-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 70vw" width="2400" height="1408" alt="Cuisine avec îlot en marbre et électroménager Liebherr, image d'artiste" loading="lazy" decoding="async"></picture></figure>
-      <figure class="pv__item" data-pv-item="lift"><picture><img src="/ceuil-preview/img/gallery-1600.webp" srcset="/ceuil-preview/img/gallery-800.webp 800w, /ceuil-preview/img/gallery-1600.webp 1600w, /ceuil-preview/img/gallery-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 70vw" width="2400" height="1186" alt="Galerie à l'étage surplombant le salon, image d'artiste" loading="lazy" decoding="async"></picture></figure>
-      <figure class="pv__item" data-pv-item="suite"><picture><img src="/ceuil-preview/img/suite-1600.webp" srcset="/ceuil-preview/img/suite-800.webp 800w, /ceuil-preview/img/suite-1600.webp 1600w, /ceuil-preview/img/suite-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 70vw" width="2400" height="1186" alt="Suite parentale avec dressing, ambiance intérieure" loading="lazy" decoding="async"></picture></figure>
-      <figure class="pv__item" data-pv-item="hammam"><picture><img src="/ceuil-preview/img/massage-1600.webp" srcset="/ceuil-preview/img/massage-800.webp 800w, /ceuil-preview/img/massage-1600.webp 1600w, /ceuil-preview/img/massage-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 70vw" width="2400" height="1600" alt="Salle de massage du hammam, perspective d'artiste" loading="lazy" decoding="async"></picture></figure>
-      <figure class="pv__item" data-pv-item="pool"><picture><img src="/ceuil-preview/img/pool-1600.webp" srcset="/ceuil-preview/img/pool-800.webp 800w, /ceuil-preview/img/pool-1600.webp 1600w, /ceuil-preview/img/pool-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 70vw" width="2400" height="1186" alt="Piscine privée et salon en contrebas, perspective d'artiste" loading="lazy" decoding="async"></picture></figure>
-      </div>
-      <div class="pv__text-wrap">
-        <p class="pv__text is-on" data-pv-text="living">8 mètres sous plafond, sols en pierre de Taza beige et baies vitrées toute hauteur.</p>
-        <p class="pv__text" data-pv-text="kitchen">Chaque villa est livrée avec une cuisine entièrement équipée en électroménager Liebherr.</p>
-        <p class="pv__text" data-pv-text="lift">Une galerie à l'étage surplombe le salon double hauteur.</p>
-        <p class="pv__text" data-pv-text="suite">Dressing et climatisation gainable dans chaque pièce.</p>
-        <p class="pv__text" data-pv-text="hammam">Chaque villa a son hammam et sa salle de massage.</p>
-        <p class="pv__text" data-pv-text="pool">Piscine privée avec jacuzzi sur une plage en marbre de Taza gris.</p>
-      </div>
-    </div>
-    <div class="pv__pills" role="tablist" aria-label="L'intérieur.">
-      <button role="tab" aria-selected="true" data-pv-pill="living"><i></i>Séjour</button>
-      <button role="tab" aria-selected="false" data-pv-pill="kitchen"><i></i>Cuisine</button>
-      <button role="tab" aria-selected="false" data-pv-pill="lift"><i></i>Galerie</button>
-      <button role="tab" aria-selected="false" data-pv-pill="suite"><i></i>Suite parentale</button>
-      <button role="tab" aria-selected="false" data-pv-pill="hammam"><i></i>Hammam</button>
-      <button role="tab" aria-selected="false" data-pv-pill="pool"><i></i>Piscine</button>
-    </div>
-    <p class="caption">Les visuels sont des perspectives d'artiste, non contractuelles. Les images sont fournies à titre indicatif.</p>
-  </div>
-</section>
-
-<!-- 7 · DAY → NIGHT -->
-<section class="dn" aria-labelledby="dn-t" data-turn data-mode="seq" data-frames="83" data-src="/ceuil-preview/seq/daynight/f_" data-src-m="/ceuil-preview/seq/daynight-m/f_">
-  <div class="turn__sticky dn__sticky">
-    <div class="dn__head wrap">
-      <p class="eyebrow">Du jour à la nuit</p>
-      <h2 class="h2" id="dn-t">L'heure dorée.<br><em>Puis la nuit s'allume.</em></h2>
-    </div>
-    <div class="dn__frame" data-dn-frame>
-      <img class="turn__fallback" src="/ceuil-preview/seq/daynight/f_001.webp" alt="Villa Type 2 du jour à la nuit, perspective d'artiste" width="1600" height="912" loading="lazy">
-      <canvas class="turn__canvas" width="1600" height="912" aria-hidden="true"></canvas>
-    </div>
-    <ol class="seq__steps wrap" aria-hidden="true">
-      <li data-from="0" data-to="0.34"><b>Jour</b><span>La lumière de l'après-midi sur l'enduit blanc et la pierre de Taza.</span></li>
-      <li data-from="0.34" data-to="0.67"><b>Crépuscule</b><span>Le soleil descend, la piscine s'illumine.</span></li>
-      <li data-from="0.67" data-to="1.01"><b>Nuit</b><span>La nuit, la lumière dessine les lignes du toit.</span></li>
-    </ol>
-  </div>
-</section>
-
 <!-- 8 · FLOOR PLANS -->
 <section class="plans band" id="plans" aria-labelledby="plans-t" data-plan>
   <div class="wrap">
@@ -246,48 +209,6 @@
     </div>
   </div>
   <dialog class="plans__dlg" data-plan-dlg><form method="dialog"><button class="dlg-close">Fermer</button></form><img alt="" data-plan-dlg-img></dialog>
-</section>
-
-<!-- 9 · LUSSY HEALTH CENTER -->
-<section class="well" id="estate" aria-labelledby="well-t">
-  <div class="wrap">
-    <p class="eyebrow" data-split-fade>Lussy Health Center</p>
-    <h2 class="h2" id="well-t" data-split>Le bien-être,<br><em>au sein de la résidence.</em></h2>
-    <figure class="well__banner tile" data-reveal-tile><picture><img src="/ceuil-preview/img/wellness-1600.webp" srcset="/ceuil-preview/img/wellness-800.webp 800w, /ceuil-preview/img/wellness-1600.webp 1600w, /ceuil-preview/img/wellness-2400.webp 2400w" sizes="(max-width: 1200px) 100vw, 1120px" width="2400" height="761" alt="Salon spa du Lussy Health Center avec piscine intérieure, image d'artiste" loading="lazy" decoding="async"></picture></figure>
-    <div class="well__grid">
-      <figure class="well__gym tile" data-reveal-tile><picture><img src="/ceuil-preview/img/gym-1600.webp" srcset="/ceuil-preview/img/gym-800.webp 800w, /ceuil-preview/img/gym-1600.webp 1600w, /ceuil-preview/img/gym-2400.webp 2400w" sizes="(max-width: 1000px) 100vw, 60vw" width="2400" height="1586" alt="Salle de sport et fitness du Lussy Health Center, image d'artiste" loading="lazy" decoding="async"></picture></figure>
-      <ul class="well__stats">
-        <li class="tile" data-split-fade><b><span data-count="500">500</span><small> m²</small></b><h3>Réservé aux femmes</h3><p>Centre de bien-être et de fitness dédié aux femmes.</p></li>
-        <li class="tile" data-split-fade><b><span data-count="100">100</span><small> m²</small></b><h3>Salle de sport hommes</h3><p>Salle de sport et de musculation pour les résidents.</p></li>
-        <li class="tile" data-split-fade><b>∞</b><h3>Longévité</h3><p>Un centre de longévité : bilan santé, nutrition, médecine préventive.</p></li>
-      </ul>
-    </div>
-  </div>
-  <div class="rail" data-rail>
-    <figure class="lus tile" data-card><picture><img src="/ceuil-preview/img/lussy-spa-1600.webp" srcset="/ceuil-preview/img/lussy-spa-800.webp 800w, /ceuil-preview/img/lussy-spa-1600.webp 1600w" sizes="(max-width: 700px) 78vw, 380px" width="1600" height="1181" alt="Spa" loading="lazy" decoding="async"></picture><figcaption>Spa</figcaption></figure>
-    <figure class="lus tile" data-card><picture><img src="/ceuil-preview/img/lussy-longevity-1600.webp" srcset="/ceuil-preview/img/lussy-longevity-800.webp 800w, /ceuil-preview/img/lussy-longevity-1600.webp 1600w" sizes="(max-width: 700px) 78vw, 380px" width="1600" height="1074" alt="Centre longévité" loading="lazy" decoding="async"></picture><figcaption>Centre longévité</figcaption></figure>
-    <figure class="lus tile" data-card><picture><img src="/ceuil-preview/img/lussy-o2-1600.webp" srcset="/ceuil-preview/img/lussy-o2-800.webp 800w, /ceuil-preview/img/lussy-o2-1600.webp 1600w" sizes="(max-width: 700px) 78vw, 380px" width="1600" height="1175" alt="Caisson oxygène" loading="lazy" decoding="async"></picture><figcaption>Caisson oxygène</figcaption></figure>
-    <figure class="lus tile" data-card><picture><img src="/ceuil-preview/img/lussy-light-1600.webp" srcset="/ceuil-preview/img/lussy-light-800.webp 800w, /ceuil-preview/img/lussy-light-1600.webp 1600w" sizes="(max-width: 700px) 78vw, 380px" width="1600" height="1240" alt="Luminothérapie" loading="lazy" decoding="async"></picture><figcaption>Luminothérapie</figcaption></figure>
-    <figure class="lus tile" data-card><picture><img src="/ceuil-preview/img/lussy-aesthetic-1600.webp" srcset="/ceuil-preview/img/lussy-aesthetic-800.webp 800w, /ceuil-preview/img/lussy-aesthetic-1600.webp 1600w" sizes="(max-width: 700px) 78vw, 380px" width="1600" height="1069" alt="Centre esthétique" loading="lazy" decoding="async"></picture><figcaption>Centre esthétique</figcaption></figure>
-    <figure class="lus tile" data-card><picture><img src="/ceuil-preview/img/lussy-holistic-1600.webp" srcset="/ceuil-preview/img/lussy-holistic-800.webp 800w, /ceuil-preview/img/lussy-holistic-1600.webp 1600w" sizes="(max-width: 700px) 78vw, 380px" width="1600" height="1128" alt="Expérience holistique" loading="lazy" decoding="async"></picture><figcaption>Expérience holistique</figcaption></figure>
-  </div>
-  <p class="caption wrap">Les visuels sont des perspectives d'artiste, non contractuelles. Les images sont fournies à titre indicatif.</p>
-</section>
-
-<!-- 10 · SERVICES -->
-<section class="svc band" aria-labelledby="svc-t">
-  <div class="wrap">
-    <p class="eyebrow" data-split-fade>Services</p>
-    <h2 class="h2" id="svc-t" data-split>Tout,<br><em>sur place.</em></h2>
-    <div class="svc__grid">
-      <article class="svc__card tile" data-split-fade><div class="svc__img"><picture><img src="/ceuil-preview/img/concierge-1600.webp" srcset="/ceuil-preview/img/concierge-800.webp 800w, /ceuil-preview/img/concierge-1600.webp 1600w, /ceuil-preview/img/concierge-2400.webp 2400w" sizes="(max-width: 700px) 100vw, 33vw" width="2400" height="1600" alt="Salon de conciergerie, image d'artiste" loading="lazy" decoding="async"></picture></div><div class="svc__body"><h3>Conciergerie</h3><p>Conciergerie et gestion locative, entretien du jardin et de la piscine.¹</p></div></article>
-      <article class="svc__card tile" data-split-fade><div class="svc__img"><picture><img src="/ceuil-preview/img/security-1600.webp" srcset="/ceuil-preview/img/security-800.webp 800w, /ceuil-preview/img/security-1600.webp 1600w, /ceuil-preview/img/security-2400.webp 2400w" sizes="(max-width: 700px) 100vw, 33vw" width="2400" height="1600" alt="Entrée gardée du domaine, image d'artiste" loading="lazy" decoding="async"></picture></div><div class="svc__body"><h3>Sécurité</h3><p>Deux gardiens à plein temps, contrôle d'accès et vidéosurveillance.</p></div></article>
-      <article class="svc__card tile" data-split-fade><div class="svc__img"><picture><img src="/ceuil-preview/img/cafe-1600.webp" srcset="/ceuil-preview/img/cafe-800.webp 800w, /ceuil-preview/img/cafe-1600.webp 1600w, /ceuil-preview/img/cafe-2400.webp 2400w" sizes="(max-width: 700px) 100vw, 33vw" width="2400" height="1600" alt="Petit-déjeuner en room service au bord de la piscine, image d'artiste" loading="lazy" decoding="async"></picture></div><div class="svc__body"><h3>Café & épicerie</h3><p>Room service par le café et l'épicerie de la résidence.</p></div></article>
-      <article class="svc__card tile" data-split-fade><div class="svc__img"><picture><img src="/ceuil-preview/img/vito-1600.webp" srcset="/ceuil-preview/img/vito-800.webp 800w, /ceuil-preview/img/vito-1600.webp 1600w, /ceuil-preview/img/vito-2400.webp 2400w" sizes="(max-width: 700px) 100vw, 33vw" width="2400" height="1600" alt="Mercedes-Benz Vito devant une villa, image d'artiste" loading="lazy" decoding="async"></picture></div><div class="svc__body"><h3>Mercedes-Benz Vito</h3><p>Un véhicule dédié aux résidents et aux voyageurs Airbnb : trajets et transferts.</p></div></article>
-      <article class="svc__card tile" data-split-fade><div class="svc__img"><picture><img src="/ceuil-preview/img/kids-1600.webp" srcset="/ceuil-preview/img/kids-800.webp 800w, /ceuil-preview/img/kids-1600.webp 1600w, /ceuil-preview/img/kids-2400.webp 2400w" sizes="(max-width: 700px) 100vw, 33vw" width="2400" height="1600" alt="Salle de jeux de la crèche, image d'artiste" loading="lazy" decoding="async"></picture></div><div class="svc__body"><h3>Crèche</h3><p>Une crèche et garderie à côté de la résidence.</p></div></article>
-      <article class="svc__card tile" data-split-fade><div class="svc__img"><picture><img src="/ceuil-preview/img/padel-1600.webp" srcset="/ceuil-preview/img/padel-800.webp 800w, /ceuil-preview/img/padel-1600.webp 1600w, /ceuil-preview/img/padel-2400.webp 2400w" sizes="(max-width: 700px) 100vw, 33vw" width="2400" height="2500" alt="Terrain de padel, image d'artiste" loading="lazy" decoding="async"></picture></div><div class="svc__body"><h3>Padel</h3><p>Un terrain de padel face à l'Atlas.</p></div></article>
-    </div>
-  </div>
 </section>
 
 <!-- 11 · MASTER PLAN -->
@@ -464,55 +385,36 @@
   </div>
 </section>
 
-<!-- 15 · PRIVATE VISIT -->
-<section class="visit band" id="visit" aria-labelledby="visit-t">
-  <div class="wrap visit__grid">
-    <div>
-      <p class="eyebrow" data-split-fade>Visite privée</p>
-      <h2 class="h2" id="visit-t" data-split>Venez la <em>découvrir.</em></h2>
-      <p class="lead" data-split-fade>Dites-nous quand vous convient. Nous confirmerons votre visite.</p>
-      <div class="visit__brochure tile" data-split-fade>
-        <h3>La brochure</h3>
-        <p>Plans, prestations et plan de paiement, en un seul document.</p>
-        <a class="btn btn--ghost" href="https://wa.me/212664106546?text=Bonjour, pourriez-vous m'envoyer la brochure de Ceuil Private Residence ?" target="_blank" rel="noopener">Recevoir la brochure (WhatsApp)</a>
-      </div>
-      <p class="label">Ou parlons-en maintenant</p>
-      <p><a class="link" href="https://wa.me/212664106546?text=Bonjour, je souhaite réserver une visite privée de Ceuil Private Residence." target="_blank" rel="noopener">WhatsApp · +212 664 106 546</a></p>
+<!-- 15 · SECURE YOUR VILLA: image left, form right -->
+<section class="secure" id="visit" aria-labelledby="visit-t">
+  <div class="wrap secure__grid">
+    <figure class="secure__img" data-reveal-tile><picture><img src="/ceuil-preview/img/estate-aerial-1600.webp" srcset="/ceuil-preview/img/estate-aerial-800.webp 800w, /ceuil-preview/img/estate-aerial-1600.webp 1600w, /ceuil-preview/img/estate-aerial-2400.webp 2400w" sizes="(max-width: 1000px) 100vw, 50vw" width="2400" height="1698" alt="Vue aérienne du domaine Ceuil, perspective d'artiste" loading="lazy" decoding="async"></picture></figure>
+    <div class="secure__form">
+      <h2 class="h2" id="visit-t" data-split-fade>Réservez votre villa Ceuil</h2>
+      <p class="copy" data-split-fade>Laissez vos coordonnées : notre équipe vous enverra plans, prix et disponibilités.</p>
+      <form class="form" data-form novalidate>
+        <label><span>Nom complet</span><input name="name" autocomplete="name" required></label>
+        <label><span>E-mail</span><input name="email" type="email" autocomplete="email"></label>
+        <label><span>Téléphone (WhatsApp)</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+        <label><span>Type de villa</span><select name="type"><option value="">Choisir</option><option>Type 1 · 563 m²</option><option>Type 2 · 945 m²</option><option>Type 3 · 576 m²</option><option>Type 4 · 933 m²</option><option>Type 5 · 824 m²</option></select></label>
+        <label class="form__check"><input type="checkbox" name="consent" required> J'accepte d'être contacté(e) au sujet de Ceuil Private Residence.</label>
+        <button class="btn btn--gold btn--block btn--lg" type="submit">Manifester votre intérêt</button>
+        <p class="form__msg" role="status" data-form-msg hidden>Ceci est un aperçu : le formulaire n'est pas encore connecté, rien n'a été envoyé. Écrivez-nous plutôt sur WhatsApp.</p>
+      </form>
+      <p class="secure__wa"><a class="link" href="https://wa.me/212664106546?text=Bonjour, je souhaite réserver une visite privée de Ceuil Private Residence." target="_blank" rel="noopener">WhatsApp · +212 664 106 546</a></p>
     </div>
-    <form class="form tile" data-form novalidate data-split-fade>
-      <label>Nom complet<input name="name" autocomplete="name" required></label>
-      <label>Téléphone (WhatsApp)<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
-      <label>E-mail<input name="email" type="email" autocomplete="email"></label>
-      <div class="form__row">
-        <label>Budget<select name="budget"><option value="">Choisir</option><option>Jusqu'à 1 M€</option><option>1 M€ – 2 M€</option><option>2 M€ et plus</option><option>Je préfère ne pas répondre</option></select></label>
-        <label>Date souhaitée<input name="date" type="date"></label>
-      </div>
-      <label>Langue préférée<select name="language"><option>Français</option><option>English</option><option>العربية</option></select></label>
-      <label class="form__check"><input type="checkbox" name="consent" required> J'accepte d'être contacté(e) au sujet de Ceuil Private Residence.</label>
-      <button class="btn" type="submit">Demander ma visite</button>
-      <p class="form__msg" role="status" data-form-msg hidden>Ceci est un aperçu : le formulaire n'est pas encore connecté, rien n'a été envoyé. Écrivez-nous plutôt sur WhatsApp.</p>
-    </form>
   </div>
 </section>
 
 
 </main>
 <footer class="foot" data-foot>
-  <div class="wrap">
-    <div class="foot__top">
-      <a class="wordmark wordmark--lg" href="#top" aria-label="Haut de page">C<span>E</span>U<span>I</span>L</a>
-      <div class="foot__contacts">
-        <p class="label">Contacts commerciaux</p>
-        <p>Guillaume Pons · <a href="tel:+212664106546">+212 664 106 546</a></p>
-        <p><a href="mailto:pons.zaghloul@gmail.com">pons.zaghloul@gmail.com</a></p>
-      </div>
-    </div>
-    <p class="foot__disc">Les visuels sont des perspectives d'artiste, non contractuelles. Les images sont fournies à titre indicatif.</p>
-    <p class="foot__src">¹ Source : brochure CEUIL Private Residence, cahier des charges du promoteur, plan de paiement, carte de situation et notes de révision (27 oct. 2026). Chiffres susceptibles d'évoluer.</p>
-    <div class="foot__bottom">
-      <span>© 2026 Ceuil Private Residence · Promoteur : [à confirmer] · Tous droits réservés.</span>
-      <span><a href="/ceuil-preview/fr/legal.html">Mentions légales</a> · <a href="/ceuil-preview/en/" hreflang="en">English</a> · <a href="#top">Haut de page ↑</a></span>
-    </div>
+  <div class="wrap center">
+    <a class="wordmark wordmark--lg" href="#top" aria-label="Haut de page"><span class="wordmark__c">CEUIL</span><span class="wordmark__s">Private Residence</span></a>
+    <p class="foot__contacts">Guillaume Pons · <a href="tel:+212664106546">+212 664 106 546</a> · <a href="mailto:pons.zaghloul@gmail.com">pons.zaghloul@gmail.com</a></p>
+    <p class="foot__links"><a href="/ceuil-preview/fr/legal.html">Mentions légales</a> | <a href="/ceuil-preview/en/" hreflang="en">English</a></p>
+    <p class="foot__copy">Copyright © 2026 Ceuil Private Residence · Promoteur : [à confirmer]</p>
+    <p class="foot__disc">Les visuels sont des perspectives d'artiste, non contractuelles. Les images sont fournies à titre indicatif. ¹ Source : brochure CEUIL Private Residence, cahier des charges du promoteur, plan de paiement, carte de situation et notes de révision (27 oct. 2026). Chiffres susceptibles d'évoluer.</p>
   </div>
 </footer>
 <a class="fcta" href="https://wa.me/212664106546?text=Bonjour, je souhaite réserver une visite privée de Ceuil Private Residence." target="_blank" rel="noopener" data-fcta aria-label="Visite · WhatsApp">
@@ -520,7 +422,7 @@
   <span class="fcta__long">Visite · WhatsApp</span><span class="fcta__short">Visite</span>
 </a>
 
-<script>window.T={plans:{"eyebrow":"Plans","title":"Cinq types de villas.<br><em>Trouvez la vôtre.</em>","type":"Type","gf":"Rez-de-chaussée","ff":"Étage","b":"Sous-sol","gf_b":"Rez-de-chaussée · variante","suites":"suites","bedrooms":"chambres","baths":"salles de bains","lift":"Ascenseur","kitchen":"Cuisine","hammam":"Hammam","living":"Habitable","terrace":"Terrasse","total":"Total","level":"Niveau","built":"Surface bâtie","plots":"Villas","unit":"Unités","ff_missing":"Plan de l'étage à fournir par le promoteur [à confirmer].","t1_note":"Deux variantes de rez-de-chaussée sont présentées pour le Type 1. Surface bâtie totale 563 m² ; surfaces de l'étage [à confirmer].","alt":"Plan, Villa Type","zoom":"Ouvrir le plan en plein écran","src_note":"Plans d'origine de l'architecte (légendes en anglais)."},mp:{"eyebrow":"Plan de masse","title":"Onze parcelles.<br><em>Une rue paisible.</em>","filter":"Filtrer par type","all":"Tous","available":"Disponible","reserved":"Réservée","sold":"Vendue","villa":"Villa","land":"Terrain","built":"Bâti","type":"Type","request":"Se renseigner sur cette villa","price":"Prix sur demande","common":"Espaces communs : 1 200 m².¹","cafe":"Café · restaurant","play":"Espace vert · jeux","hint":"Sélectionnez une parcelle pour voir le détail.","alt":"Plan de masse aérien du domaine Ceuil avec 11 parcelles numérotées, perspective d'artiste"},hero:{"eyebrow":"Ceuil Private Residence","title":"Luxe et intimité<br><em>au cœur de Marrakech.</em>","line":"11 villas privées · Km 5, route de Tahanaout, Marrakech","cta":"Réserver une visite privée","film":"Voir le film","pause":"Mettre le film en pause","play":"Lire le film","scroll":"Défiler pour découvrir"},hl:{"title":"L'<em>essentiel.</em>","pause":"Pause","play":"Lecture","prev":"Précédent","next":"Suivant","s1":"11 villas dans un domaine privé et sécurisé.","s2":"Votre piscine, avec jacuzzi.","s3":"Une salle de sport et un espace fitness.","s4":"Un hammam privé dans chaque villa.","s5":"Le padel, face à l'Atlas.","a1":"Vue aérienne du domaine Ceuil, perspective d'artiste","a2":"Piscine privée et salon en contrebas, perspective d'artiste","a3":"Salle de sport et fitness du Lussy Health Center, image d'artiste","a4":"Hammam privé avec niches voûtées, image d'artiste","a5":"Terrain de padel face à l'Atlas, perspective d'artiste"},nav:{"villa":"Villa","plans":"Plans","estate":"Bien-être","location":"Situation","payment":"Paiement","enquire":"Contact","menu":"Menu","close":"Fermer","home":"Ceuil Private Residence, accueil"},golf:{"eyebrow":"Emplacement","title":"Km 5, route de Tahanaout.<br><em>13 golfs à moins de 20 km.</em>","holes":"trous","city":"Marrakech","you":"Ceuil","airport":"Aéroport Menara","list_h":"Golfs","near_h":"Au quotidien","note":"Carte illustrative, pas à l'échelle. Distances et temps de trajet en voiture publiés par le promoteur.¹","map_alt":"Carte illustrée de Marrakech avec les golfs autour de Ceuil Private Residence, image d'artiste"},pay:{"eyebrow":"Plan de paiement","title":"Vous payez <em>au fil du chantier.</em>","lead":"Sept étapes, liées à l'avancement des travaux.¹","s1":"Réservation","s1t":"À la réservation","s2":"Gros œuvre achevé","s2t":"Selon avancement du chantier","s3":"Début des finitions","s3t":"Début des travaux de finition","s4":"Avancement des finitions","s4t":"Avancement significatif","s5":"Finitions & équipements","s5t":"Phase de finition","s6":"Villa achevée","s6t":"Villa achevée","s7":"Remise des clés","s7t":"Livraison finale","cum":"Cumul","dates":"Démarrage : 1er septembre 2026 · Livraison prévue au plus tard le 1er mai 2028 · Titres fonciers délivrés à l'achèvement du gros œuvre.¹","alt":"Une villa, du terrassement à l'achèvement, image d'artiste"}};window.BASE="/ceuil-preview/";</script>
+<script>window.T={plans:{"eyebrow":"Plans","title":"Cinq types de villas.<br><em>Trouvez la vôtre.</em>","type":"Type","gf":"Rez-de-chaussée","ff":"Étage","b":"Sous-sol","gf_b":"Rez-de-chaussée · variante","suites":"suites","bedrooms":"chambres","baths":"salles de bains","lift":"Ascenseur","kitchen":"Cuisine","hammam":"Hammam","living":"Habitable","terrace":"Terrasse","total":"Total","level":"Niveau","built":"Surface bâtie","plots":"Villas","unit":"Unités","ff_missing":"Plan de l'étage à fournir par le promoteur [à confirmer].","t1_note":"Deux variantes de rez-de-chaussée sont présentées pour le Type 1. Surface bâtie totale 563 m² ; surfaces de l'étage [à confirmer].","alt":"Plan, Villa Type","zoom":"Ouvrir le plan en plein écran","src_note":"Plans d'origine de l'architecte (légendes en anglais)."},mp:{"eyebrow":"Plan de masse","title":"Onze parcelles.<br><em>Une rue paisible.</em>","filter":"Filtrer par type","all":"Tous","available":"Disponible","reserved":"Réservée","sold":"Vendue","villa":"Villa","land":"Terrain","built":"Bâti","type":"Type","request":"Se renseigner sur cette villa","price":"Prix sur demande","common":"Espaces communs : 1 200 m².¹","cafe":"Café · restaurant","play":"Espace vert · jeux","hint":"Sélectionnez une parcelle pour voir le détail.","alt":"Plan de masse aérien du domaine Ceuil avec 11 parcelles numérotées, perspective d'artiste"},hero:{"eyebrow":"Ceuil Private Residence","title":"Luxe et intimité<br>au cœur de Marrakech","line":"11 villas privées · Km 5, route de Tahanaout, Marrakech","cta":"Réserver une visite privée","film":"Voir le film","pause":"Mettre le film en pause","play":"Lire le film","scroll":"Défiler pour découvrir"},hl:{"title":"L'<em>essentiel.</em>","pause":"Pause","play":"Lecture","prev":"Précédent","next":"Suivant","s1":"11 villas dans un domaine privé et sécurisé.","s2":"Votre piscine, avec jacuzzi.","s3":"Une salle de sport et un espace fitness.","s4":"Un hammam privé dans chaque villa.","s5":"Le padel, face à l'Atlas.","a1":"Vue aérienne du domaine Ceuil, perspective d'artiste","a2":"Piscine privée et salon en contrebas, perspective d'artiste","a3":"Salle de sport et fitness du Lussy Health Center, image d'artiste","a4":"Hammam privé avec niches voûtées, image d'artiste","a5":"Terrain de padel face à l'Atlas, perspective d'artiste"},nav:{"villa":"Villa","plans":"Plans","estate":"Bien-être","location":"Situation","payment":"Paiement","enquire":"Contact","menu":"Menu","close":"Fermer","home":"Ceuil Private Residence, accueil"},golf:{"eyebrow":"Emplacement","title":"Km 5, route de Tahanaout.<br><em>13 golfs à moins de 20 km.</em>","holes":"trous","city":"Marrakech","you":"Ceuil","airport":"Aéroport Menara","list_h":"Golfs","near_h":"Au quotidien","note":"Carte illustrative, pas à l'échelle. Distances et temps de trajet en voiture publiés par le promoteur.¹","map_alt":"Carte illustrée de Marrakech avec les golfs autour de Ceuil Private Residence, image d'artiste"},pay:{"eyebrow":"Plan de paiement","title":"Vous payez <em>au fil du chantier.</em>","lead":"Sept étapes, liées à l'avancement des travaux.¹","s1":"Réservation","s1t":"À la réservation","s2":"Gros œuvre achevé","s2t":"Selon avancement du chantier","s3":"Début des finitions","s3t":"Début des travaux de finition","s4":"Avancement des finitions","s4t":"Avancement significatif","s5":"Finitions & équipements","s5t":"Phase de finition","s6":"Villa achevée","s6t":"Villa achevée","s7":"Remise des clés","s7t":"Livraison finale","cum":"Cumul","dates":"Démarrage : 1er septembre 2026 · Livraison prévue au plus tard le 1er mai 2028 · Titres fonciers délivrés à l'achèvement du gros œuvre.¹","alt":"Une villa, du terrassement à l'achèvement, image d'artiste"}};window.BASE="/ceuil-preview/";</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>

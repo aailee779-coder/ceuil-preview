@@ -64,6 +64,7 @@
     if (y > lastY + 4 && y > 80) gnav?.classList.add('is-hidden');
     if (y < lastY - 4 || y < 80) gnav?.classList.remove('is-hidden');
     lnav?.classList.toggle('is-on', !hero || y > innerHeight * 0.7);
+    gnav?.classList.toggle('is-solid', y > innerHeight * 0.6);
     lnav?.classList.toggle('is-top', !!gnav?.classList.contains('is-hidden'));
     lastY = y;
   });
@@ -451,7 +452,7 @@
     requestAnimationFrame(step);
   };
   const kio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { countUp(e.target); kio.unobserve(e.target); } }), { threshold: 0.6 });
-  $$('.hero__facts [data-count], .well__stats [data-count]').forEach(el => { el.textContent = '0'; kio.observe(el); });
+  $$('.figs [data-count], .well__stats [data-count]').forEach(el => { el.textContent = '0'; kio.observe(el); });
   $$('[data-draw-svg]').forEach(async holder => {
     try {
       const txt = await (await fetch(holder.dataset.src)).text();
