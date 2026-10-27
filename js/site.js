@@ -98,7 +98,7 @@
     return $$('.sw > span', el);
   };
   if (!RM && G) {
-    $$('[data-split], .turn__head .h2, .dn__head .h2, .golf__head .h2').forEach(el => {
+    $$('[data-split], .turn__head .h2, .dn__head .h2, .where__head .h2, .radar__head .h2').forEach(el => {
       const words = splitWords(el);
       G.set(words, { yPercent: 115 });
       const io = new IntersectionObserver(([e]) => {
@@ -348,66 +348,98 @@
     });
   });
 
-  /* ── 12 location: golf map. Routes draw out from Ceuil course by course (nearest first), pins pop, the card follows */
-  const golf = $('[data-golf]');
-  if (golf && D.golf) {
-    const GT = T.golf || {}, M = D.map;
-    const layer = $('[data-golf-layer]', golf), svg = $('[data-golf-svg]', golf), pinsEl = $('[data-golf-pins]', golf);
-    const nowEl = $('[data-golf-now]', golf), listEl = $('[data-golf-list]', golf), scene = $('[data-golf-scene]', golf);
-    const pos = (el, [x, y]) => { el.style.left = x + '%'; el.style.top = y + '%'; };
-    pos($('[data-golf-you]', golf), M.you); pos($('[data-golf-city]', golf), M.city); pos($('[data-golf-air]', golf), M.airport);
-    const km = g => `${fmt(g.km, g.km % 1 ? 1 : 0)} km · ${g.min} min · ${g.holes} ${GT.holes}`;
-    const order = D.golf.map((g, i) => i).sort((a, b) => D.golf[a].km - D.golf[b].km);
-    const NS = 'http://www.w3.org/2000/svg';
-    const pins = [], paths = [], items = [];
-    D.golf.forEach(g => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.textContent = g.n; b.setAttribute('aria-label', `${g.name}, ${km(g)}`); pos(b, [g.x, g.y]);
-      b.addEventListener('click', () => show(D.golf.indexOf(g), true));
-      pinsEl.appendChild(b); pins.push(b);
-      const pa = document.createElementNS(NS, 'path'); pa.setAttribute('pathLength', '1'); svg.appendChild(pa); paths.push(pa);
-      const li = document.createElement('li'); li.innerHTML = `<i>${g.n}</i>${g.name}<em>${fmt(g.km, g.km % 1 ? 1 : 0)} km · ${g.min} min</em>`;
-      listEl.appendChild(li); items.push(li);
-    });
-    const place = () => {
-      const w = layer.clientWidth, h = layer.clientHeight;
-      svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-      const x0 = M.you[0] / 100 * w, y0 = M.you[1] / 100 * h;
-      D.golf.forEach((g, i) => {
-        const x1 = g.x / 100 * w, y1 = g.y / 100 * h, dx = x1 - x0, dy = y1 - y0;
-        // gentle arc: control point pushed sideways from the midpoint
-        const cx = (x0 + x1) / 2 - dy * 0.18, cy = (y0 + y1) / 2 + dx * 0.18;
-        paths[i].setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)}`);
+  /* ── 12 location: the developer's plan redrawn in SVG. Opens on Ceuil, zooms out to the city, the route to Jemaa El Fna draws,
+        places appear with their drive times. Labels are HTML placed from map coordinates so they stay crisp at every zoom. */
+  const where = $('[data-where]');
+  if (where) {
+    const svg = $('[data-where-svg]', where), box = $('[data-where-map]', where), route = $('[data-where-route]', where), scene = $('[data-where-scene]', where);
+    const labels = $$('[data-where-labels] .wl', where).map(el => { const [x, y] = el.dataset.at.split(',').map(Number); return { el, x, y, k: el.dataset.k == null ? null : +el.dataset.k, al: el.dataset.al || '' }; });
+    // [x0, y0, x1, y1] in plan coordinates
+    const START = [230, 420, 450, 590];
+    const END = () => small() ? [130, 110, 460, 580] : [20, 30, 690, 575];
+    const fit = ([x0, y0, x1, y1], W, H) => {
+      let w = x1 - x0, h = y1 - y0; const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      if (w / h > W / H) h = w * H / W; else w = h * W / H;
+      return [cx - w / 2, cy - h / 2, w, h];
+    };
+    let last = -1;
+    const render = p => {
+      const W = box.clientWidth, H = box.clientHeight;
+      const z = ease(clamp(p / 0.62));
+      const e = END(), b = START.map((v, i) => lerp(v, e[i], z));
+      const [vx, vy, vw, vh] = fit(b, W, H);
+      svg.setAttribute('viewBox', `${vx.toFixed(1)} ${vy.toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}`);
+      route.style.strokeWidth = (4 * vw / W).toFixed(2);
+      route.style.setProperty('--route', ease(clamp((p - 0.08) / 0.6)).toFixed(4));
+      labels.forEach(l => {
+        const sx = (l.x - vx) / vw * W, sy = (l.y - vy) / vh * H;
+        let tf = 'translate(-50%,-50%)';
+        if (l.el.classList.contains('wl--you')) tf = 'translate(-50%, calc(-100% - 20px))';
+        else if (l.el.classList.contains('wl--poi')) { const flip = sx > W * 0.58; l.el.classList.toggle('is-flip', flip); tf = flip ? 'translate(calc(-100% + 11px),-50%)' : 'translate(-11px,-50%)'; }
+        else if (l.al === 'l') tf = 'translate(0,-50%)';
+        else if (l.al === 'r') tf = 'translate(-100%,-50%)';
+        else if (l.al === 'l2') tf = 'translate(-50%,-50%) rotate(-62deg)';
+        l.el.style.transform = `translate(${sx.toFixed(1)}px,${sy.toFixed(1)}px) ${tf}`;
+        if (l.k != null) l.el.classList.toggle('is-on', p >= l.k * 0.8 + 0.05);
+        if (l.el.matches('.wl--road,.wl--area')) l.el.style.setProperty('--o', clamp((z - 0.45) / 0.4).toFixed(2));
       });
     };
-    place(); addEventListener('resize', place);
-    let cur = -1;
-    function show(i, manual) {
-      if (i === cur) return;
-      cur = i;
-      pins.forEach((b, k) => b.classList.toggle('is-cur', k === i));
-      items.forEach((li, k) => li.classList.toggle('is-cur', k === i));
-      if (i < 0) { nowEl.classList.remove('is-on'); return; }
-      const g = D.golf[i];
-      nowEl.innerHTML = `<span class="n">${g.n}</span><div><b>${g.name}</b><span>${km(g)}</span></div>`;
-      nowEl.classList.add('is-on');
-      if (manual) pins[i].classList.add('is-on');
-    }
-    if (RM) { pins.forEach(b => b.classList.add('is-on')); paths.forEach(p => { p.style.setProperty('--d', 1); p.classList.add('is-done'); }); show(order[0]); }
+    addEventListener('resize', () => render(Math.max(0, last)));
+    if (RM) render(1);
     else scenes.push(() => {
-      const r = golf.getBoundingClientRect();
+      const r = where.getBoundingClientRect();
       if (r.bottom < -100 || r.top > innerHeight + 100) return;
       const p = prog(scene);
-      const t = clamp((p - 0.06) / 0.86) * order.length;    // one course per slice of the pinned scroll
-      const idx = Math.min(order.length - 1, Math.floor(t)), f = t - Math.floor(t);
-      order.forEach((gi, k) => {
-        const done = k < idx || (k === idx && t >= order.length);
-        const d = done ? 1 : k === idx ? ease(clamp(f * 1.8)) : 0;
-        paths[gi].style.setProperty('--d', d.toFixed(3));
-        paths[gi].classList.toggle('is-done', done);
-        pins[gi].classList.toggle('is-on', done || (k === idx && f > 0.5));
-      });
-      show(t <= 0 ? -1 : order[idx]);
+      if (Math.abs(p - last) < 0.0005) return;
+      last = p; render(p);
+    });
+    render(0);
+  }
+
+  /* ── 12b golf radar: rings at 5/10/15/20 km, each course at its published distance and its bearing on the developer's golf map.
+        The hand sweeps clockwise from north with scroll and reveals courses as it passes them. */
+  const radar = $('[data-radar]');
+  if (radar && D.golf) {
+    const GT = T.golf || {}, NS = 'http://www.w3.org/2000/svg';
+    const dotsG = $('[data-radar-dots]', radar), sweep = $('[data-radar-sweep]', radar), hand = $('[data-radar-hand]', radar);
+    const nowEl = $('[data-radar-now]', radar), listEl = $('[data-radar-list]', radar), scene = $('[data-radar-scene]', radar);
+    const Y = D.map.you, kmTxt = g => `${fmt(g.km, g.km % 1 ? 1 : 0)} km · ${g.min} min · ${g.holes} ${GT.holes}`;
+    const items = D.golf.map(g => {
+      const dx = (g.x - Y[0]) * 1.5, dy = g.y - Y[1];               // golf map is 3:2, so x% counts 1.5× a y%
+      const bear = (Math.atan2(dx, -dy) * 180 / Math.PI + 360) % 360;  // 0° = north, clockwise
+      const r = g.km / 20 * 100, a = (bear - 90) * Math.PI / 180;
+      const x = Math.cos(a) * r, y = Math.sin(a) * r;
+      const line = document.createElementNS(NS, 'line'); line.setAttribute('class', 'r-line'); line.setAttribute('x1', 0); line.setAttribute('y1', 0); line.setAttribute('x2', x.toFixed(1)); line.setAttribute('y2', y.toFixed(1));
+      const at = document.createElementNS(NS, 'g'); at.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+      const grp = document.createElementNS(NS, 'g'); grp.setAttribute('class', 'r-dot');   // CSS scales this one; the parent holds the position
+      grp.innerHTML = `<circle r="5.5"/><text>${g.n}</text>`;
+      at.appendChild(grp); dotsG.append(line, at);
+      const li = document.createElement('li'); li.innerHTML = `<i>${g.n}</i>${g.name}<em>${kmTxt(g).split(' · ').slice(0, 2).join(' · ')}</em>`; listEl.appendChild(li);
+      return { g, bear, line, grp, li };
+    });
+    const order = [...items].sort((a, b) => a.bear - b.bear);
+    let cur = null;
+    const show = it => {
+      if (it === cur) return; cur = it;
+      items.forEach(o => { const on = o === it; o.grp.classList.toggle('is-cur', on); o.line.classList.toggle('is-cur', on); o.li.classList.toggle('is-cur', on); });
+      if (!it) { nowEl.classList.remove('is-on'); return; }
+      nowEl.innerHTML = `<span class="n">${it.g.n}</span><div><b>${it.g.name}</b><span>${kmTxt(it.g)}</span></div>`;
+      nowEl.classList.add('is-on');
+    };
+    const draw = deg => {
+      const a = (deg - 90) * Math.PI / 180, a0 = (Math.max(0, deg - 40) - 90) * Math.PI / 180;
+      hand.setAttribute('x2', (Math.cos(a) * 100).toFixed(2)); hand.setAttribute('y2', (Math.sin(a) * 100).toFixed(2));
+      sweep.setAttribute('d', deg <= 0 ? '' : `M0 0 L${(Math.cos(a0) * 100).toFixed(2)} ${(Math.sin(a0) * 100).toFixed(2)} A100 100 0 0 1 ${(Math.cos(a) * 100).toFixed(2)} ${(Math.sin(a) * 100).toFixed(2)} Z`);
+      let latest = null;
+      order.forEach(o => { const on = deg >= o.bear; o.grp.classList.toggle('is-on', on); if (on) latest = o; });
+      show(latest);
+    };
+    $$('.r-dot', radar).forEach((d, i) => d.addEventListener('click', () => show(items[i])));
+    if (RM) { draw(360); }
+    else scenes.push(() => {
+      const r = radar.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > innerHeight + 100) return;
+      draw(clamp((prog(scene) - 0.05) / 0.85) * 360);
     });
   }
 
@@ -419,7 +451,7 @@
     requestAnimationFrame(step);
   };
   const kio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { countUp(e.target); kio.unobserve(e.target); } }), { threshold: 0.6 });
-  $$('.facts [data-count], .well__stats [data-count]').forEach(el => { el.textContent = '0'; kio.observe(el); });
+  $$('.hero__facts [data-count], .well__stats [data-count]').forEach(el => { el.textContent = '0'; kio.observe(el); });
   $$('[data-draw-svg]').forEach(async holder => {
     try {
       const txt = await (await fetch(holder.dataset.src)).text();
