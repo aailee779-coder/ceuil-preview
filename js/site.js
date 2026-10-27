@@ -1,4 +1,4 @@
-/* Ceuil · v2 site behaviour. One story, one scroll: every section has its own scroll-linked motion.
+/* Ceuil · v4 site behaviour. One story, one scroll: every section has its own scroll-linked motion.
    Plain JS core; GSAP + Lenis enhance (split headlines, smooth scroll). All motion respects prefers-reduced-motion. */
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
@@ -98,7 +98,7 @@
     return $$('.sw > span', el);
   };
   if (!RM && G) {
-    $$('[data-split], .turn__head .h2, .dn__head .h2, .loc__head .h2').forEach(el => {
+    $$('[data-split], .turn__head .h2, .dn__head .h2, .golf__head .h2').forEach(el => {
       const words = splitWords(el);
       G.set(words, { yPercent: 115 });
       const io = new IntersectionObserver(([e]) => {
@@ -175,6 +175,13 @@
     const canvas = $('canvas', sec), ctx = canvas.getContext('2d');
     const callouts = $$('[data-from]', sec), deg = $('[data-turn-deg]', sec), dial = $('.dial', sec);
     const stage = $('[data-turn-stage]', sec), frame = $('[data-dn-frame]', sec);
+    const steps = $$('[data-step]', sec), fillEl = $('[data-pay-fill]', sec), nowEl = $('[data-pay-now]', sec);
+    const setSteps = q => {
+      let cur = -1;
+      steps.forEach((s, k) => { const on = q >= +s.dataset.step; s.classList.toggle('is-on', on); if (on) cur = k; });
+      fillEl?.style.setProperty('--fill', clamp(q / 0.9).toFixed(4));
+      if (nowEl && cur >= 0) { const li = steps[cur]; const h = `<b>${li.querySelector('b').textContent}</b> · ${li.querySelector(':scope > span').textContent}`; if (nowEl.innerHTML !== h) nowEl.innerHTML = h; }
+    };
     const frames = new Array(n);
     let current = -1, want = 0, started = false;
     const url = k => `${prefix}${String(k + 1).padStart(3, '0')}.webp`;
@@ -196,7 +203,7 @@
       current = f; sec.classList.add('is-ready');
     }
     const progressive = async () => { await load(0); for (const step of [16, 8, 4, 2, 1]) await Promise.all(Array.from({ length: Math.ceil(n / step) }, (_, j) => load(j * step))); };
-    if (RM) { callouts.forEach(c => c.classList.add('is-on')); return; }
+    if (RM) { callouts.forEach(c => c.classList.add('is-on')); setSteps(1); return; }
     new IntersectionObserver(([e]) => { if (e.isIntersecting && !started) { started = true; size(); progressive(); } }, { rootMargin: '120% 0px' }).observe(sec);
     addEventListener('resize', () => started && size());
     scenes.push(() => {
@@ -224,6 +231,7 @@
         const q = clamp((p - 0.18) / 0.8);
         want = Math.min(n - 1, Math.round(q * (n - 1)));
         callouts.forEach(c => c.classList.toggle('is-on', q >= +c.dataset.from && q < +c.dataset.to));
+        if (steps.length) setSteps(q);
       }
       draw(want);
     });
@@ -340,38 +348,66 @@
     });
   });
 
-  /* ── 10 location: map zooms out, the route draws from Ceuil to the city, places appear in drive-time order */
-  const loc = $('[data-loc]');
-  if (loc) {
-    const layer = $('[data-loc-layer]', loc), route = $('[data-loc-route]', loc), box = $('[data-loc-map]', loc), img = $('.loc__bg img', loc);
-    const pts = $$('[data-loc-pts] li', loc);
-    // positions in map-image coordinates (0..1), after the developer's location plan (brochure p.3); illustrative
-    const POS = {
-      d: { you: [0.505, 0.60], hotel: [0.41, 0.52], airport: [0.25, 0.37], jemaa: [0.478, 0.175], station: [0.37, 0.145] },
-      m: { you: [0.525, 0.60], hotel: [0.40, 0.53], airport: [0.26, 0.33], jemaa: [0.525, 0.17], station: [0.40, 0.14] }
-    };
+  /* ── 12 location: golf map. Routes draw out from Ceuil course by course (nearest first), pins pop, the card follows */
+  const golf = $('[data-golf]');
+  if (golf && D.golf) {
+    const GT = T.golf || {}, M = D.map;
+    const layer = $('[data-golf-layer]', golf), svg = $('[data-golf-svg]', golf), pinsEl = $('[data-golf-pins]', golf);
+    const nowEl = $('[data-golf-now]', golf), listEl = $('[data-golf-list]', golf), scene = $('[data-golf-scene]', golf);
+    const pos = (el, [x, y]) => { el.style.left = x + '%'; el.style.top = y + '%'; };
+    pos($('[data-golf-you]', golf), M.you); pos($('[data-golf-city]', golf), M.city); pos($('[data-golf-air]', golf), M.airport);
+    const km = g => `${fmt(g.km, g.km % 1 ? 1 : 0)} km · ${g.min} min · ${g.holes} ${GT.holes}`;
+    const order = D.golf.map((g, i) => i).sort((a, b) => D.golf[a].km - D.golf[b].km);
+    const NS = 'http://www.w3.org/2000/svg';
+    const pins = [], paths = [], items = [];
+    D.golf.forEach(g => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = g.n; b.setAttribute('aria-label', `${g.name}, ${km(g)}`); pos(b, [g.x, g.y]);
+      b.addEventListener('click', () => show(D.golf.indexOf(g), true));
+      pinsEl.appendChild(b); pins.push(b);
+      const pa = document.createElementNS(NS, 'path'); pa.setAttribute('pathLength', '1'); svg.appendChild(pa); paths.push(pa);
+      const li = document.createElement('li'); li.innerHTML = `<i>${g.n}</i>${g.name}<em>${fmt(g.km, g.km % 1 ? 1 : 0)} km · ${g.min} min</em>`;
+      listEl.appendChild(li); items.push(li);
+    });
     const place = () => {
-      const bw = box.clientWidth, bh = box.clientHeight;
-      const portrait = small();
-      const iw = portrait ? 1200 : 2400, ih = portrait ? 1800 : 1600;
-      const s = Math.max(bw / iw, bh / ih), dw = iw * s, dh = ih * s, ox = (bw - dw) / 2, oy = (bh - dh) / 2;
-      const P = portrait ? POS.m : POS.d;
-      const at = k => [((ox + P[k][0] * dw) / bw) * 100, ((oy + P[k][1] * dh) / bh) * 100];
-      pts.forEach(li => { const [x, y] = at(li.dataset.key); li.style.setProperty('--x', x + '%'); li.style.setProperty('--y', y + '%'); li.classList.toggle('is-left', x > 60 && li.dataset.key !== 'you'); });
-      // route drawn in pixel space so the dash animation stays continuous
-      route.ownerSVGElement.setAttribute('viewBox', `0 0 ${bw} ${bh}`);
-      const px = k => [ox + P[k][0] * dw, oy + P[k][1] * dh];
-      const [x0, y0] = px('you'), [x1, y1] = px('jemaa');
-      route.setAttribute('d', `M${x0} ${y0} C ${x0 + 6} ${lerp(y0, y1, .45)}, ${x1 - 8} ${lerp(y0, y1, .7)}, ${x1} ${y1}`);
+      const w = layer.clientWidth, h = layer.clientHeight;
+      svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      const x0 = M.you[0] / 100 * w, y0 = M.you[1] / 100 * h;
+      D.golf.forEach((g, i) => {
+        const x1 = g.x / 100 * w, y1 = g.y / 100 * h, dx = x1 - x0, dy = y1 - y0;
+        // gentle arc: control point pushed sideways from the midpoint
+        const cx = (x0 + x1) / 2 - dy * 0.18, cy = (y0 + y1) / 2 + dx * 0.18;
+        paths[i].setAttribute('d', `M${x0.toFixed(1)} ${y0.toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)}`);
+      });
     };
-    if (img.complete) place(); else img.addEventListener('load', place);
-    addEventListener('resize', place); place();
-    if (RM) { pts.forEach(li => li.classList.add('is-on')); route.style.setProperty('--route', 1); }
+    place(); addEventListener('resize', place);
+    let cur = -1;
+    function show(i, manual) {
+      if (i === cur) return;
+      cur = i;
+      pins.forEach((b, k) => b.classList.toggle('is-cur', k === i));
+      items.forEach((li, k) => li.classList.toggle('is-cur', k === i));
+      if (i < 0) { nowEl.classList.remove('is-on'); return; }
+      const g = D.golf[i];
+      nowEl.innerHTML = `<span class="n">${g.n}</span><div><b>${g.name}</b><span>${km(g)}</span></div>`;
+      nowEl.classList.add('is-on');
+      if (manual) pins[i].classList.add('is-on');
+    }
+    if (RM) { pins.forEach(b => b.classList.add('is-on')); paths.forEach(p => { p.style.setProperty('--d', 1); p.classList.add('is-done'); }); show(order[0]); }
     else scenes.push(() => {
-      const p = prog($('[data-loc-scene]', loc));
-      layer.style.setProperty('--z', lerp(1.18, 1, ease(clamp(p / 0.5))).toFixed(4));
-      route.style.setProperty('--route', ease(clamp((p - 0.05) / 0.55)).toFixed(4));
-      pts.forEach(li => li.dataset.at && li.classList.toggle('is-on', p >= +li.dataset.at));
+      const r = golf.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > innerHeight + 100) return;
+      const p = prog(scene);
+      const t = clamp((p - 0.06) / 0.86) * order.length;    // one course per slice of the pinned scroll
+      const idx = Math.min(order.length - 1, Math.floor(t)), f = t - Math.floor(t);
+      order.forEach((gi, k) => {
+        const done = k < idx || (k === idx && t >= order.length);
+        const d = done ? 1 : k === idx ? ease(clamp(f * 1.8)) : 0;
+        paths[gi].style.setProperty('--d', d.toFixed(3));
+        paths[gi].classList.toggle('is-done', done);
+        pins[gi].classList.toggle('is-on', done || (k === idx && f > 0.5));
+      });
+      show(t <= 0 ? -1 : order[idx]);
     });
   }
 
@@ -383,7 +419,7 @@
     requestAnimationFrame(step);
   };
   const kio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { countUp(e.target); kio.unobserve(e.target); } }), { threshold: 0.6 });
-  $$('.kpis [data-count]').forEach(el => { el.textContent = '0'; kio.observe(el); });
+  $$('.facts [data-count], .well__stats [data-count]').forEach(el => { el.textContent = '0'; kio.observe(el); });
   $$('[data-draw-svg]').forEach(async holder => {
     try {
       const txt = await (await fetch(holder.dataset.src)).text();
@@ -420,7 +456,7 @@
   }
 
   /* ── 13 faq: smooth height */
-  $$('[data-faq] details').forEach(d => {
+  $$('details[data-faq], [data-faq] details').forEach(d => {
     const sum = $('summary', d), body = $('.faq__a', d);
     sum.addEventListener('click', e => {
       if (RM) return;

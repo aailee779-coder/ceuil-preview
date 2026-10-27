@@ -46,5 +46,23 @@ window.CEUIL = {
     { n: 10, type: 3, land: 1009.72, built: 576, status: 'available', x: 46.7, y: 57.7 },
     { n: 11, type: 1, land: 1019.80, built: 563, status: 'available', x: 59.8, y: 55.6 }
   ],
+  // Golf courses: names, km, drive minutes and holes from the developer's "Marrakech Golf Lifestyle" map (2026-10-27).
+  // x/y = % position on the illustrated map (img/golfmap), traced from that map; illustrative, not to scale.
+  golf: [
+    { n: 1, name: 'Noria Golf Club', km: 2, min: 5, holes: 18, x: 25.4, y: 44.5 },
+    { n: 2, name: 'The Tony Jacklin Marrakech', km: 4, min: 8, holes: 18, x: 7.5, y: 39.5 },
+    { n: 3, name: 'Argan Golf Resort', km: 2.5, min: 6, holes: 18, x: 17.6, y: 48.8 },
+    { n: 4, name: 'Akenza Golf Resort', km: 3, min: 7, holes: 18, x: 29, y: 57.5 },
+    { n: 5, name: 'Atlas Golf Marrakech', km: 5, min: 10, holes: 18, x: 30, y: 72.8 },
+    { n: 6, name: 'The Montgomerie Marrakech', km: 9, min: 15, holes: 18, x: 53.4, y: 55 },
+    { n: 7, name: 'Assoufid Golf Club', km: 13.5, min: 25, holes: 18, x: 58.6, y: 64.5 },
+    { n: 8, name: 'Samanah Golf Club', km: 12.5, min: 22, holes: 18, x: 75.8, y: 73.7 },
+    { n: 9, name: 'Royal Golf Marrakech', km: 13, min: 22, holes: 27, x: 73.6, y: 40 },
+    { n: 10, name: 'Al Maaden Golf Resort', km: 15.6, min: 28, holes: 18, x: 85.3, y: 55.7 },
+    { n: 11, name: 'Amelkis Golf Club', km: 16.5, min: 28, holes: 27, x: 62.8, y: 27.3 },
+    { n: 12, name: 'PalmGolf Ourika', km: 8, min: 18, holes: 18, x: 81.4, y: 84.5 },
+    { n: 13, name: 'PalmGolf Palmeraie', km: 20, min: 30, holes: 18, x: 43.6, y: 7.8 }
+  ],
+  map: { you: [17, 57], city: [44.3, 36.1], airport: [14, 21.5] },
   wa: '212664106546'
 };
