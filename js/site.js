@@ -322,7 +322,7 @@
     const label = s => M[s] || s;
     D.plots.forEach((p, k) => {
       const b = document.createElement('button');
-      b.type = 'button'; b.textContent = p.n; b.dataset.status = p.status; b.dataset.type = p.type;
+      b.type = 'button'; b.textContent = p.n; b.dataset.status = p.status; b.dataset.type = p.type; if (p.status === 'sold') b.dataset.tag = label('sold').toUpperCase();
       b.style.left = p.x + '%'; b.style.top = p.y + '%'; b.style.transitionDelay = `${400 + k * 70}ms`;
       b.setAttribute('aria-label', `${M.villa} ${p.n} · ${M.type} ${p.type} · ${label(p.status)}`); b.setAttribute('aria-pressed', 'false');
       b.addEventListener('click', () => { pins.querySelectorAll('button').forEach(x => x.style.transitionDelay = '0ms'); show(p, b); });
@@ -353,7 +353,7 @@
         places appear with their drive times. Labels are HTML placed from map coordinates so they stay crisp at every zoom. */
   const where = $('[data-where]');
   if (where) {
-    const svg = $('[data-where-svg]', where), box = $('[data-where-map]', where), route = $('[data-where-route]', where), scene = $('[data-where-scene]', where);
+    const svg = $('[data-where-svg]', where), box = $('[data-where-map]', where), routes = $$('[data-where-route]', where), scene = $('[data-where-scene]', where);
     const labels = $$('[data-where-labels] .wl', where).map(el => { const [x, y] = el.dataset.at.split(',').map(Number); return { el, x, y, k: el.dataset.k == null ? null : +el.dataset.k, al: el.dataset.al || '' }; });
     // [x0, y0, x1, y1] in plan coordinates
     const START = [230, 420, 450, 590];
@@ -370,19 +370,20 @@
       const e = END(), b = START.map((v, i) => lerp(v, e[i], z));
       const [vx, vy, vw, vh] = fit(b, W, H);
       svg.setAttribute('viewBox', `${vx.toFixed(1)} ${vy.toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}`);
-      route.style.strokeWidth = (4 * vw / W).toFixed(2);
-      route.style.setProperty('--route', ease(clamp((p - 0.08) / 0.6)).toFixed(4));
+      const rd = ease(clamp((p - 0.08) / 0.6)).toFixed(4);
+      routes.forEach((r, i) => { r.style.strokeWidth = ((i ? 5 : 9) * vw / W).toFixed(2); r.style.setProperty('--route', rd); });
       labels.forEach(l => {
         const sx = (l.x - vx) / vw * W, sy = (l.y - vy) / vh * H;
         let tf = 'translate(-50%,-50%)';
-        if (l.el.classList.contains('wl--you')) tf = 'translate(-50%, calc(-100% - 20px))';
+        if (l.el.classList.contains('wl--you')) tf = 'translate(-50%, calc(-100% - 44px))';
+        else if (l.el.classList.contains('wl--pin')) tf = 'translate(-50%,-100%) rotate(-45deg)';
         else if (l.el.classList.contains('wl--poi')) { const flip = sx > W * 0.58; l.el.classList.toggle('is-flip', flip); tf = flip ? 'translate(calc(-100% + 11px),-50%)' : 'translate(-11px,-50%)'; }
         else if (l.al === 'l') tf = 'translate(0,-50%)';
         else if (l.al === 'r') tf = 'translate(-100%,-50%)';
         else if (l.al === 'l2') tf = 'translate(-50%,-50%) rotate(-62deg)';
         l.el.style.transform = `translate(${sx.toFixed(1)}px,${sy.toFixed(1)}px) ${tf}`;
         if (l.k != null) l.el.classList.toggle('is-on', p >= l.k * 0.8 + 0.05);
-        if (l.el.matches('.wl--road,.wl--area')) l.el.style.setProperty('--o', clamp((z - 0.45) / 0.4).toFixed(2));
+        if (l.el.matches('.wl--road,.wl--area,.wl--park')) l.el.style.setProperty('--o', clamp((z - 0.45) / 0.4).toFixed(2));
       });
     };
     addEventListener('resize', () => render(Math.max(0, last)));

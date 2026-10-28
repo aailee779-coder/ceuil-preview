@@ -1,5 +1,5 @@
 // Villa data. Every figure is from the client brochure (EN): plot table p.5, plan pages p.6–23.
-// Status: all available (Anas, 2026-10-23). The villa→type mapping is deduced from the site-plan highlights (to confirm).
+// Status: villas 2, 6, 7, 11 sold (Anas, 2026-10-28); others available. The villa→type mapping is deduced from the site-plan highlights (to confirm).
 window.CEUIL = {
   types: {
     1: { plots: [1, 11], built: 563, suites: 4, baths: 5, lift: false,
@@ -35,16 +35,16 @@ window.CEUIL = {
   // x/y = % position of the plot number on the master-plan image
   plots: [
     { n: 1, type: 1, land: 1005.82, built: 563, status: 'available', x: 85.1, y: 47.9 },
-    { n: 2, type: 2, land: 1340.76, built: 945, status: 'available', x: 80.8, y: 26.6 },
+    { n: 2, type: 2, land: 1340.76, built: 945, status: 'sold', x: 80.8, y: 26.6 },
     { n: 3, type: 3, land: 1001.58, built: 576, status: 'available', x: 63.9, y: 26.6 },
     { n: 4, type: 3, land: 1002.39, built: 576, status: 'available', x: 46.2, y: 27.3 },
     { n: 5, type: 3, land: 1002.40, built: 576, status: 'available', x: 29.9, y: 27.3 },
-    { n: 6, type: 2, land: 1180.72, built: 945, status: 'available', x: 11.9, y: 26.9 },
-    { n: 7, type: 5, land: 1164.27, built: 824, status: 'available', x: 12.4, y: 50.7 },
+    { n: 6, type: 2, land: 1180.72, built: 945, status: 'sold', x: 11.9, y: 26.9 },
+    { n: 7, type: 5, land: 1164.27, built: 824, status: 'sold', x: 12.4, y: 50.7 },
     { n: 8, type: 2, land: 1376.25, built: 945, status: 'available', x: 13.8, y: 78.3 },
     { n: 9, type: 4, land: 1152.73, built: 933, status: 'available', x: 29.4, y: 72.4 },
     { n: 10, type: 3, land: 1009.72, built: 576, status: 'available', x: 46.7, y: 57.7 },
-    { n: 11, type: 1, land: 1019.80, built: 563, status: 'available', x: 59.8, y: 55.6 }
+    { n: 11, type: 1, land: 1019.80, built: 563, status: 'sold', x: 59.8, y: 55.6 }
   ],
   // Golf courses: names, km, drive minutes and holes from the developer's "Marrakech Golf Lifestyle" map (2026-10-27).
   // x/y = % position on the illustrated map (img/golfmap), traced from that map; illustrative, not to scale.

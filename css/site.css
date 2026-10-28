@@ -857,6 +857,50 @@ section .h2{text-align:center}
   .secure__grid{grid-template-columns:1fr 1fr;gap:72px}
   .foot .wordmark{align-items:center}
 }
+/* ───────── v7: Apple Maps–style location map, SOLD tags on the master plan */
+.where__map{background:#F3F1EC;border:0}
+.w-city{fill:#ECE8E0}
+.w-medina{fill:#EADCC6;stroke:#DCC7A6;stroke-width:1;vector-effect:non-scaling-stroke}
+.w-park{fill:#CFE9C1}
+.w-water{fill:#A7D3F5}
+.w-roads path{stroke:#FFFFFF;stroke-width:3.2;filter:drop-shadow(0 0 .7px #CFC8BA)}
+.w-main path{fill:none;stroke:#FFD86A;stroke-width:5.5;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 .8px #D9A93F)}
+.w-runway{fill:#D1CCC2}
+.w-route,.w-route-case{fill:none;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:calc(1 - var(--route,0));filter:none}
+.w-route{stroke:#0A84FF}
+.w-route-case{stroke:#FFFFFF}
+.wl--road{background:none;color:#8A8577;font:600 9.5px/1 var(--sans);letter-spacing:.12em;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff;padding:0}
+.wl--area{color:#9A958A;font:600 10px/1 var(--sans);letter-spacing:.2em;text-shadow:0 0 3px #F3F1EC,0 0 3px #F3F1EC}
+.wl--park{position:absolute;color:#3F8F3A;font:600 11px/1.1 var(--sans);text-shadow:0 0 3px #CFE9C1,0 0 3px #fff;opacity:var(--o,0);transition:opacity .4s;white-space:nowrap}
+.wl--poi{background:none;box-shadow:none;padding:0;gap:6px;align-items:center;color:#1D1D1F}
+.wl--poi.is-flip{padding:0}
+.wl--poi i{width:24px;height:24px;border-radius:99px;background:var(--c);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25);display:grid;place-items:center}
+.wl--poi i svg{width:13px;height:13px;fill:#fff}
+.wl--poi>span{display:flex;flex-direction:column;gap:2px;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff}
+.wl--poi.is-flip>span{align-items:flex-end}
+.wl--poi b{color:#1D1D1F;font:600 12px/1.1 var(--sans)}
+.wl--poi small{color:#6E6E73;font:500 11px/1 var(--sans)}
+.wl--sm i{width:18px;height:18px}.wl--sm i svg{width:10px;height:10px}.wl--sm b{font-size:10.5px}
+.wl--key i{width:32px;height:32px;box-shadow:0 0 0 0 rgba(255,149,0,.6),0 3px 10px rgba(0,0,0,.3);animation:mall 2.2s var(--ease) infinite}
+.wl--key i svg{width:17px;height:17px}
+.wl--key b{font-size:14px;color:#C86A00}
+@keyframes mall{0%{box-shadow:0 0 0 0 rgba(255,149,0,.55),0 3px 10px rgba(0,0,0,.3)}100%{box-shadow:0 0 0 18px rgba(255,149,0,0),0 3px 10px rgba(0,0,0,.3)}}
+.wl--pin{width:34px;height:34px;border-radius:50% 50% 50% 0;background:#FF3B30;border:3px solid #fff;transform-origin:center;box-shadow:0 4px 12px rgba(0,0,0,.35);animation:none;display:grid;place-items:center}
+.wl--pin i{font:800 13px/1 var(--sans);color:#fff;font-style:normal;transform:rotate(45deg)}
+.wl--you{background:#fff;color:#1D1D1F;border-radius:12px;padding:10px 14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.wl--you::after{background:#fff}
+.wl--you small{color:#6E6E73;opacity:1}
+.wl--n{width:26px;height:26px;border-radius:99px;background:#fff;color:#FF3B30;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.2);font-size:11px;letter-spacing:0}
+.mp__pins button{color:#1D1D1F!important;font-weight:700}
+.mp__pins button[data-status=sold]{background:#1D1D1F;color:#fff!important}
+.mp__pins button[data-status=sold]::before{content:attr(data-tag);position:absolute;left:50%;top:-22px;transform:translateX(-50%);background:#C8102E;color:#fff;font:800 9px/1 var(--sans);letter-spacing:.14em;padding:4px 7px;border-radius:3px;box-shadow:0 3px 8px rgba(0,0,0,.35);white-space:nowrap}
+.mp__card .st--sold+*{color:#fff}
+@media (min-width: 700px){
+  .wl--poi b{font-size:13.5px}.wl--poi small{font-size:12px}
+  .wl--key b{font-size:16px}
+  .wl--road{font-size:10.5px}.wl--area{font-size:11.5px}.wl--park{font-size:13px}
+  .mp__pins button[data-status=sold]::before{font-size:10px;top:-26px}
+}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .js [data-split-fade],.js [data-reveal-tile],.card{opacity:1;transform:none;clip-path:none}
@@ -864,7 +908,7 @@ section .h2{text-align:center}
   .turn,.dn,.quote,.loc__scene,.golf__scene,.where__scene,.radar__scene{height:auto}
   .turn__sticky,.quote__sticky,.loc__sticky,.golf__sticky,.where__sticky,.radar__sticky{position:relative;height:auto;min-height:100svh}
   .wl--poi,.r-dot{opacity:1;scale:1;transform:none}
-  .wl--road,.wl--area{--o:1}
+  .wl--road,.wl--area,.wl--park{--o:1}
   .golf__pins button,.lus{--s:1;opacity:1;transform:translate(-50%,-50%)}
   .lus{transform:none}
   .golf__svg path{--d:1}
