@@ -50,7 +50,7 @@
     if (!el) return;
     e.preventDefault();
     closeMenu();
-    const off = id === '#top' ? 0 : -52;
+    const off = 0;
     if (lenis) lenis.scrollTo(id === '#top' ? 0 : el, { offset: off, duration: 1.4 });
     else (id === '#top' ? scrollTo({ top: 0, behavior: RM ? 'auto' : 'smooth' }) : el.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }));
     history.replaceState(null, '', id === '#top' ? location.pathname : id);
@@ -68,9 +68,9 @@
     lnav?.classList.toggle('is-top', !!gnav?.classList.contains('is-hidden'));
     lastY = y;
   });
-  const navLinks = $$('.lnav__links a');
+  const navLinks = $$('.gnav__links a, .menu a[href^="#"]');
   const nio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) navLinks.forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
-  ['villa', 'plans', 'estate', 'location', 'payment'].forEach(id => $('#' + id) && nio.observe($('#' + id)));
+  ['estate', 'villa', 'plans', 'masterplan', 'location', 'payment', 'visit'].forEach(id => $('#' + id) && nio.observe($('#' + id)));
 
   /* ── menu */
   const menu = $('[data-menu]'), openBtn = $('[data-menu-open]');
