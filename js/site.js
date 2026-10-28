@@ -61,8 +61,7 @@
   let lastY = scrollY;
   scenes.push(() => {
     const y = scrollY;
-    if (y > lastY + 4 && y > 80) gnav?.classList.add('is-hidden');
-    if (y < lastY - 4 || y < 80) gnav?.classList.remove('is-hidden');
+    // the header stays visible so the section menu is always one tap away
     lnav?.classList.toggle('is-on', !hero || y > innerHeight * 0.7);
     gnav?.classList.toggle('is-solid', y > (hero ? hero.offsetHeight - innerHeight * 0.4 : innerHeight * 0.6));
     lnav?.classList.toggle('is-top', !!gnav?.classList.contains('is-hidden'));
