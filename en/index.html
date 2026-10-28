@@ -41,28 +41,28 @@
 </header>
 
 <main id="main">
-<!-- 1 · HERO: full-screen film, centred spaced capitals, three facts, one gold CTA -->
-<section class="hero" id="top" aria-label="Ceuil Private Residence" data-hero>
-  <div class="hero__media">
-    <video class="hero__film" autoplay muted loop playsinline preload="metadata" poster="/ceuil-preview/media/hero-poster.jpg" data-hero-film aria-hidden="true">
-      <source media="(max-width: 699px)" src="/ceuil-preview/media/hero-portrait.mp4" type="video/mp4">
-      <source media="(max-width: 1100px)" src="/ceuil-preview/media/hero-720.mp4" type="video/mp4">
-      <source src="/ceuil-preview/media/hero-1080.webm" type="video/webm">
-      <source src="/ceuil-preview/media/hero-1080.mp4" type="video/mp4">
-    </video>
-    <picture class="hero__still"><source media="(max-width: 699px)" srcset="/ceuil-preview/media/hero-poster-portrait.jpg"><img src="/ceuil-preview/media/hero-poster.jpg" alt="Villa Type 2 at Ceuil Private Residence, artist's impression" width="1920" height="1080" fetchpriority="high"></picture>
-    <div class="hero__scrim" aria-hidden="true"></div>
+<!-- 1 · HERO: the villa goes from morning to night as you scroll, headline pinned over it -->
+<section class="hero hero--seq" id="top" aria-label="Ceuil Private Residence" data-hero data-turn data-mode="hero" data-fit="cover" data-frames="83" data-src="/ceuil-preview/seq/daynight/f_" data-src-m="/ceuil-preview/seq/daynight/f_">
+  <div class="hero__sticky">
+    <div class="hero__media">
+      <img class="turn__fallback hero__still" src="/ceuil-preview/seq/daynight/f_001.webp" alt="Villa Type 2 from daylight to night, artist's impression" width="1600" height="912" fetchpriority="high">
+      <canvas class="turn__canvas" width="1600" height="912" aria-hidden="true"></canvas>
+      <div class="hero__scrim" aria-hidden="true"></div>
+    </div>
+    <div class="hero__copy wrap">
+      <h1 class="display" data-split>Luxury and Privacy<br>in the Heart of Marrakech</h1>
+      <ul class="hero__facts">
+        <li><small>Private villas</small><b>11 only</b></li>
+        <li><small>Location</small><b>Km 5, Route de Taghnaout</b></li>
+        <li><small>Delivery</small><b>May 2028</b></li>
+      </ul>
+      <a class="btn btn--gold btn--lg" href="#visit">Register your interest</a>
+    </div>
+    <ol class="hero__phase" aria-hidden="true">
+      <li data-from="0" data-to="0.34">Day</li><li data-from="0.34" data-to="0.67">Dusk</li><li data-from="0.67" data-to="1.01">Night</li>
+    </ol>
+    <div class="hero__hint" aria-hidden="true"><i></i></div>
   </div>
-  <div class="hero__copy wrap">
-    <h1 class="display" data-split>Luxury and Privacy<br>in the Heart of Marrakech</h1>
-    <ul class="hero__facts">
-      <li><small>Private villas</small><b>11 only</b></li>
-      <li><small>Location</small><b>Km 5, Route de Taghnaout</b></li>
-      <li><small>Delivery</small><b>May 2028</b></li>
-    </ul>
-    <a class="btn btn--gold btn--lg" href="#visit">Register your interest</a>
-  </div>
-  <button class="hero__toggle" type="button" data-film-toggle aria-pressed="false"><span data-label-pause>Pause the film</span><span data-label-play hidden>Play the film</span></button>
 </section>
 
 <!-- 2 · WHY CEUIL -->

@@ -901,10 +901,25 @@ section .h2{text-align:center}
   .wl--road{font-size:10.5px}.wl--area{font-size:11.5px}.wl--park{font-size:13px}
   .mp__pins button[data-status=sold]::before{font-size:10px;top:-26px}
 }
+/* ───────── v8: hero = day → night scroll scene */
+.hero.hero--seq{height:260vh;min-height:0;padding:0}
+.hero__sticky{position:sticky;top:0;height:100svh;min-height:560px;overflow:hidden}
+.hero--seq .hero__media{position:absolute;inset:0}
+.hero--seq .turn__fallback,.hero--seq .turn__canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero--seq .hero__scrim{z-index:2}
+.hero__phase{position:absolute;z-index:3;top:calc(var(--gnav) + 18px);right:var(--g);list-style:none;margin:0;padding:0;display:flex;gap:14px}
+.hero__phase li{font:700 9.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:color .4s}
+.hero__phase li.is-on{color:var(--acc)}
+.hero__hint{position:absolute;z-index:3;left:50%;bottom:12px;width:1px;height:28px;background:rgba(255,255,255,.18);overflow:hidden;transition:opacity .5s}
+.hero__hint i{position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--acc);animation:hint 1.8s var(--ease) infinite}
+@keyframes hint{to{top:100%}}
+.hero--seq.is-moving .hero__hint{opacity:0}
+@media (min-width: 700px){.hero__phase li{font-size:10.5px}}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .js [data-split-fade],.js [data-reveal-tile],.card{opacity:1;transform:none;clip-path:none}
   .hero__film{display:none}
+  .hero.hero--seq{height:100svh}
   .turn,.dn,.quote,.loc__scene,.golf__scene,.where__scene,.radar__scene{height:auto}
   .turn__sticky,.quote__sticky,.loc__sticky,.golf__sticky,.where__sticky,.radar__sticky{position:relative;height:auto;min-height:100svh}
   .wl--poi,.r-dot{opacity:1;scale:1;transform:none}

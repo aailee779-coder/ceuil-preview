@@ -64,7 +64,7 @@
     if (y > lastY + 4 && y > 80) gnav?.classList.add('is-hidden');
     if (y < lastY - 4 || y < 80) gnav?.classList.remove('is-hidden');
     lnav?.classList.toggle('is-on', !hero || y > innerHeight * 0.7);
-    gnav?.classList.toggle('is-solid', y > innerHeight * 0.6);
+    gnav?.classList.toggle('is-solid', y > (hero ? hero.offsetHeight - innerHeight * 0.4 : innerHeight * 0.6));
     lnav?.classList.toggle('is-top', !!gnav?.classList.contains('is-hidden'));
     lastY = y;
   });
@@ -198,7 +198,7 @@
       const f = nearest(k);
       if (f < 0 || f === current) return;
       const im = frames[f], cw = canvas.width, ch = canvas.height;
-      const s = Math.min(cw / im.width, ch / im.height);  // original framing: never cropped or zoomed
+      const s = (sec.dataset.fit === 'cover' ? Math.max : Math.min)(cw / im.width, ch / im.height);  // original framing, except the full-screen hero
       const w = im.width * s, h = im.height * s;
       ctx.clearRect(0, 0, cw, ch); ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
       current = f; sec.classList.add('is-ready');
@@ -212,7 +212,13 @@
       if (r.bottom < -100 || r.top > innerHeight + 100) return;
       const p = prog(sec);
       const enter = clamp((innerHeight - r.top) / innerHeight);   // 0→1 while the section scrolls into view
-      if (mode === 'turn') {
+      if (mode === 'hero') {
+        // morning → night across the pinned scroll; the headline stays put
+        const q = clamp(p / 0.92);
+        want = Math.min(n - 1, Math.round(q * (n - 1)));
+        callouts.forEach(c => c.classList.toggle('is-on', q >= +c.dataset.from && q < +c.dataset.to));
+        sec.classList.toggle('is-moving', p > 0.02);
+      } else if (mode === 'turn') {
         // the stage settles in, then rotation runs across the pinned scroll
         const q = clamp((p - 0.04) / 0.92);
         want = Math.min(n - 1, Math.round(q * (n - 1)));
