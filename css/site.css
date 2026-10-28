@@ -915,11 +915,23 @@ section .h2{text-align:center}
 @keyframes hint{to{top:100%}}
 .hero--seq.is-moving .hero__hint{opacity:0}
 @media (min-width: 700px){.hero__phase li{font-size:10.5px}}
+/* ───────── v9: "Step inside" walkthrough */
+.walk.hero--seq{height:420vh}
+.walk__scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 26%),linear-gradient(0deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,0) 40%)}
+.walk__head{position:absolute;z-index:3;left:0;right:0;top:calc(var(--gnav) + 24px);text-align:center;transition:opacity .6s}
+.walk.is-moving .walk__head{opacity:.0}
+.walk__steps{position:absolute;z-index:3;left:0;right:0;bottom:max(44px,7svh);list-style:none;margin:0 auto;min-height:80px}
+.walk__steps li{position:absolute;left:var(--g);right:var(--g);bottom:0;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .8s var(--ease)}
+.walk__steps li.is-on{opacity:1;transform:none}
+.walk__steps b{display:block;font:400 clamp(20px,2.6vw,30px)/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:8px}
+.walk__steps span{display:block;font:300 15px/1.5 var(--sans);color:#E5DED3}
+.walk__note{position:absolute;z-index:3;left:0;right:0;bottom:14px;margin:0;text-align:center;font-size:10.5px;color:rgba(255,255,255,.55)}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .js [data-split-fade],.js [data-reveal-tile],.card{opacity:1;transform:none;clip-path:none}
   .hero__film{display:none}
-  .hero.hero--seq{height:100svh}
+  .hero.hero--seq,.walk.hero--seq{height:100svh}
+  .walk__steps li{position:relative;opacity:1;transform:none}
   .turn,.dn,.quote,.loc__scene,.golf__scene,.where__scene,.radar__scene{height:auto}
   .turn__sticky,.quote__sticky,.loc__sticky,.golf__sticky,.where__sticky,.radar__sticky{position:relative;height:auto;min-height:100svh}
   .wl--poi,.r-dot{opacity:1;scale:1;transform:none}
