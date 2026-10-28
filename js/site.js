@@ -177,6 +177,7 @@
     const callouts = $$('[data-from]', sec), deg = $('[data-turn-deg]', sec), dial = $('.dial', sec);
     const stage = $('[data-turn-stage]', sec), frame = $('[data-dn-frame]', sec);
     const steps = $$('[data-step]', sec), fillEl = $('[data-pay-fill]', sec), nowEl = $('[data-pay-now]', sec);
+    const pFill = $('[data-prog-fill]', sec), pTxt = $('[data-prog-txt]', sec);
     const setSteps = q => {
       let cur = -1;
       steps.forEach((s, k) => { const on = q >= +s.dataset.step; s.classList.toggle('is-on', on); if (on) cur = k; });
@@ -240,6 +241,7 @@
         callouts.forEach(c => c.classList.toggle('is-on', q >= +c.dataset.from && q < +c.dataset.to));
         if (steps.length) setSteps(q);
       }
+      if (pFill) { const v = clamp(p / 0.92); pFill.style.transform = `scaleX(${v.toFixed(4)})`; pTxt.textContent = Math.round(v * 100) + '%'; }
       draw(want);
     });
   });
