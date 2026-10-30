@@ -972,6 +972,25 @@ section .h2{text-align:center}
 .seqbox__bar{grid-column:1/-1;position:relative;height:2px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
 .seqbox__bar i{position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(0)}
 @media (min-width: 700px){.seqbox{left:auto;right:18px;bottom:18px;width:300px}.seqbox__p{font-size:15px}}
+/* ───────── v11: phones show the scroll films uncropped at 16:9 (sharp), text above and below */
+@media (max-width: 699px){
+  .hero__sticky{display:flex;flex-direction:column;justify-content:center;padding-top:var(--gnav);background:#000}
+  .hero--seq .hero__media{position:relative;inset:auto;width:100%;aspect-ratio:16/9;height:auto;flex:none}
+  .hero--seq .turn__fallback,.hero--seq .turn__canvas{object-fit:contain}
+  .hero--seq .hero__scrim,.walk__scrim{display:none}
+  .hero--seq .hero__copy{position:relative;bottom:auto;padding-top:26px}
+  .hero--seq .display{font-size:clamp(22px,6.6vw,30px)}
+  .hero__phase{position:relative;top:auto;right:auto;justify-content:center;margin:0 0 18px;order:-1}
+  .hero__sticky>.hero__phase{order:-1}
+  .walk__head{position:relative;top:auto;margin-bottom:18px;order:-1}
+  .seqbox{left:8px;right:auto;bottom:8px;width:132px;padding:7px 10px 8px;gap:5px 8px}
+  .seqbox__l{font-size:8px;letter-spacing:.14em}
+  .seqbox__p{font-size:11px}
+  .walk.is-moving .walk__head{opacity:1}
+  .walk__steps{position:relative;bottom:auto!important;margin:20px auto 0;min-height:104px;width:100%}
+  .walk__steps li{bottom:auto;top:0}
+  .walk__note{position:relative;bottom:auto;margin-top:6px;padding:0 var(--g)}
+}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .js [data-split-fade],.js [data-reveal-tile],.card{opacity:1;transform:none;clip-path:none}

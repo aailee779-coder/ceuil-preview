@@ -198,7 +198,7 @@
       const f = nearest(k);
       if (f < 0 || f === current) return;
       const im = frames[f], cw = canvas.width, ch = canvas.height;
-      const s = (sec.dataset.fit === 'cover' ? Math.max : Math.min)(cw / im.width, ch / im.height);  // original framing, except the full-screen hero
+      const s = (sec.dataset.fit === 'cover' && !small() ? Math.max : Math.min)(cw / im.width, ch / im.height);  // phones: full 16:9 frame, never blown up  // original framing, except the full-screen hero
       const w = im.width * s, h = im.height * s;
       ctx.clearRect(0, 0, cw, ch); ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
       current = f; sec.classList.add('is-ready');
