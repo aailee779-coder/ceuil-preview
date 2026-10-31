@@ -16,6 +16,12 @@
   const wa = text => `https://wa.me/${D.wa}?text=${encodeURIComponent(text)}`;
   const G = window.gsap;
 
+  // always open on the hero: no browser scroll restore, no #section left in the address (client request, 2026-10-31)
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  scrollTo(0, 0);
+  addEventListener('pageshow', e => { if (e.persisted) scrollTo(0, 0); });
+
   // progress of a tall section through the viewport: 0 when its top hits the top, 1 when its bottom hits the bottom
   const prog = el => { const r = el.getBoundingClientRect(); return clamp(-r.top / Math.max(1, el.offsetHeight - innerHeight)); };
   // progress of any element entering → leaving the viewport
@@ -53,7 +59,6 @@
     const off = 0;
     if (lenis) lenis.scrollTo(id === '#top' ? 0 : el, { offset: off, duration: 1.4 });
     else (id === '#top' ? scrollTo({ top: 0, behavior: RM ? 'auto' : 'smooth' }) : el.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }));
-    history.replaceState(null, '', id === '#top' ? location.pathname : id);
   }));
 
   /* ── navs */
