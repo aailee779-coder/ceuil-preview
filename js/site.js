@@ -19,8 +19,10 @@
   // always open on the hero: no browser scroll restore, no #section left in the address (client request, 2026-10-31)
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  const toTop = () => { scrollTo(0, 0); lenis?.scrollTo(0, { immediate: true, force: true }); };
   scrollTo(0, 0);
-  addEventListener('pageshow', e => { if (e.persisted) scrollTo(0, 0); });
+  addEventListener('load', () => { toTop(); setTimeout(toTop, 60); });
+  addEventListener('pageshow', e => { if (e.persisted) toTop(); });
 
   // progress of a tall section through the viewport: 0 when its top hits the top, 1 when its bottom hits the bottom
   const prog = el => { const r = el.getBoundingClientRect(); return clamp(-r.top / Math.max(1, el.offsetHeight - innerHeight)); };
