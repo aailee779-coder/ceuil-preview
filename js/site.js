@@ -363,6 +363,21 @@
     });
   });
 
+  /* ── availability: 11 villa tiles from data.js; sold ones stamped, available ones open a WhatsApp request for that villa */
+  $$('[data-avail]').forEach(sec => {
+    const A = T.av || {}, M = T.mp || {}, grid = $('[data-avail-grid]', sec);
+    const free = D.plots.filter(p => p.status === 'available').length;
+    $('[data-avail-n]', sec).textContent = free;
+    const bar = $('[data-avail-bar]', sec); bar.style.transform = `scaleX(${(free / D.plots.length).toFixed(3)})`;
+    grid.innerHTML = D.plots.map((p, k) => {
+      const sold = p.status !== 'available';
+      const inner = `<b>${p.n}</b><span>${M.type || 'Type'} ${p.type} · ${fmt(p.built)} m²</span><em>${sold ? (M[p.status] || p.status) : (A.ask || '')}</em>`;
+      return sold ? `<li class="av av--sold" style="transition-delay:${k * 60}ms" aria-label="${M.villa || 'Villa'} ${p.n}: ${M[p.status] || p.status}">${inner}</li>`
+        : `<li class="av" style="transition-delay:${k * 60}ms"><a href="${wa((A.msg || '').replace('{n}', p.n))}" target="_blank" rel="noopener" aria-label="${M.villa || 'Villa'} ${p.n}: ${A.ask || ''}">${inner}</a></li>`;
+    }).join('');
+    new IntersectionObserver(([e], o) => { if (e.isIntersecting) { sec.classList.add('is-in'); o.disconnect(); } }, { threshold: 0.25 }).observe(sec);
+  });
+
   /* ── 12 location: the developer's plan redrawn in SVG. Opens on Ceuil, zooms out to the city, the route to Jemaa El Fna draws,
         places appear with their drive times. Labels are HTML placed from map coordinates so they stay crisp at every zoom. */
   const where = $('[data-where]');
