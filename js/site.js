@@ -42,7 +42,7 @@
 
   /* ── smooth scroll */
   let lenis = null;
-  if (!RM && window.Lenis) {
+  if (false && !RM && window.Lenis) {   // off: native scroll is more predictable for our buyers (client, 2026-11-12)
     lenis = new Lenis({ duration: 1.15, easing: t => 1 - Math.pow(1 - t, 4), smoothWheel: true, syncTouch: false });
     if (G && window.ScrollTrigger) {
       G.registerPlugin(ScrollTrigger);
@@ -339,7 +339,8 @@
       b.type = 'button'; b.textContent = p.n; b.dataset.status = p.status; b.dataset.type = p.type; if (p.status === 'sold') b.dataset.tag = label('sold').toUpperCase();
       b.style.left = p.x + '%'; b.style.top = p.y + '%'; b.style.transitionDelay = `${400 + k * 70}ms`;
       b.setAttribute('aria-label', `${M.villa} ${p.n} · ${M.type} ${p.type} · ${label(p.status)}`); b.setAttribute('aria-pressed', 'false');
-      b.addEventListener('click', () => { pins.querySelectorAll('button').forEach(x => x.style.transitionDelay = '0ms'); show(p, b); });
+      if (cardEl) b.addEventListener('click', () => { pins.querySelectorAll('button').forEach(x => x.style.transitionDelay = '0ms'); show(p, b); });
+      else { b.tabIndex = -1; b.disabled = true; }
       pins.appendChild(b);
     });
     new IntersectionObserver(([e], o) => { if (e.isIntersecting) { map.classList.add('is-in'); o.disconnect(); } }, { threshold: 0.3 }).observe(map);
@@ -355,7 +356,7 @@
         <a class="btn btn--sm" href="${wa(msg)}" target="_blank" rel="noopener">${M.request}</a>`;
       if (small()) cardEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     };
-    ['all', 1, 2, 3, 4, 5].forEach(t => {
+    if (filter) ['all', 1, 2, 3, 4, 5].forEach(t => {
       const b = document.createElement('button');
       b.type = 'button'; b.textContent = t === 'all' ? M.all : `${M.type} ${t}`; b.setAttribute('aria-pressed', String(t === 'all'));
       b.addEventListener('click', () => { $$('button', filter).forEach(x => x.setAttribute('aria-pressed', String(x === b))); $$('button', pins).forEach(x => { x.style.transitionDelay = '0ms'; x.classList.toggle('is-dim', t !== 'all' && +x.dataset.type !== t); }); });
@@ -368,7 +369,7 @@
     const A = T.av || {}, M = T.mp || {}, grid = $('[data-avail-grid]', sec);
     const free = D.plots.filter(p => p.status === 'available').length;
     $('[data-avail-n]', sec).textContent = free;
-    const bar = $('[data-avail-bar]', sec); bar.style.transform = `scaleX(${(free / D.plots.length).toFixed(3)})`;
+    const bar = $('[data-avail-bar]', sec); if (bar) bar.style.transform = `scaleX(${(free / D.plots.length).toFixed(3)})`;
     grid.innerHTML = D.plots.map((p, k) => {
       const sold = p.status !== 'available';
       const inner = `<b>${p.n}</b><span>${M.type || 'Type'} ${p.type} · ${fmt(p.built)} m²</span><em>${sold ? (M[p.status] || p.status) : (A.ask || '')}</em>`;
@@ -395,6 +396,7 @@
     let last = -1;
     const render = p => {
       const W = box.clientWidth, H = box.clientHeight;
+      if (!W || !H) return;
       const z = ease(clamp(p / 0.62));
       const e = END(), b = START.map((v, i) => lerp(v, e[i], z));
       const [vx, vy, vw, vh] = fit(b, W, H);
@@ -416,15 +418,17 @@
       });
     };
     addEventListener('resize', () => render(Math.max(0, last)));
-    if (RM) render(1);
-    else scenes.push(() => {
-      const r = where.getBoundingClientRect();
-      if (r.bottom < -100 || r.top > innerHeight + 100) return;
-      const p = prog(scene);
-      if (Math.abs(p - last) < 0.0005) return;
-      last = p; render(p);
-    });
-    render(0);
+    last = 1; render(1);
+    addEventListener('load', () => render(1));
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) render(1); }).observe(box);
+  }
+
+  /* ── golf: plain list, nearest first */
+  const golfList = $('[data-golf-list]');
+  if (golfList && D.golf) {
+    const GT = T.golf || {};
+    golfList.innerHTML = [...D.golf].sort((a, b) => a.km - b.km)
+      .map(g => `<li><b>${g.name}</b><span>${fmt(g.km, g.km % 1 ? 1 : 0)} km · ${g.min} min · ${g.holes} ${GT.holes || ''}</span></li>`).join('');
   }
 
   /* ── 12b golf radar: rings at 5/10/15/20 km, each course at its published distance and its bearing on the developer's golf map.
@@ -533,6 +537,21 @@
         body.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 520, easing: 'cubic-bezier(.22,1,.36,1)' });
       }
     });
+  });
+
+  /* ── explore: six cards first, the rest on request */
+  $$('[data-more]').forEach(sec => {
+    const cards = $$('.pc', sec), btn = $('[data-more-btn]', sec);
+    if (!btn || cards.length <= 6) { btn?.remove(); return; }
+    cards.slice(6).forEach(c => c.hidden = true);
+    btn.addEventListener('click', () => { cards.forEach(c => c.hidden = false); btn.closest('.cta-row').remove(); cards[6].querySelector('h3')?.setAttribute('tabindex', '-1'); cards[6].querySelector('h3')?.focus({ preventScroll: true }); });
+  });
+
+  /* ── films: one big Play button over the poster; then the normal video controls */
+  $$('[data-film-play]').forEach(btn => {
+    const v = btn.parentElement.querySelector('video');
+    btn.addEventListener('click', () => { v.controls = true; v.play(); btn.hidden = true; });
+    v.addEventListener('play', () => { v.controls = true; btn.hidden = true; });
   });
 
   /* ── floating CTA: after the hero, hidden near the form and footer */

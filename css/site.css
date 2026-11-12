@@ -1026,6 +1026,87 @@ section .h2{text-align:center}
 }
 @media (min-width:1000px){.avail__grid{grid-template-columns:repeat(6,1fr)}}
 
+/* ───────── v13 (2026-11-12): simpler, easier to read for a 45+ audience.
+   Native scroll, one short scroll scene (hero), bigger type, stronger contrast, calmer capitals. */
+:root{--ink-2:#CFC8BF;--ink-3:#B3ABA2;--line:#4A443E}
+body{font-size:17px;line-height:1.6}
+.h2{letter-spacing:.06em;font-size:clamp(24px,3vw,34px)}
+.display{letter-spacing:.08em}
+.copy{font-size:17px;font-weight:400;line-height:1.7;color:var(--ink-2)}
+.caption,.foot__disc{font-size:13px;color:var(--ink-3)}
+.btn,.btn--gold{font-size:14px;letter-spacing:.06em;min-height:52px}
+.btn--lg{min-height:58px;font-size:15px}
+.gnav__links a{font-size:13px!important;letter-spacing:.06em!important}
+.hero.hero--seq{height:170vh}
+.hero__phase{display:none}
+.hero__facts small{font-size:12px;letter-spacing:.1em}
+.hero__facts b{font-size:15px}
+/* intro + figures in one */
+.why{padding:80px 0 72px}
+.why .figs__row{margin-top:44px}
+.figs__row span{font-size:14px;color:var(--ink-2)}
+/* explore: plain cards */
+.explore__grid{display:grid;grid-template-columns:1fr;gap:34px;overflow:visible;padding-top:34px}
+.pc{flex:none}
+.pc h3{font-size:17px;letter-spacing:.03em;margin:16px 0 6px}
+.pc p{font-size:15.5px;line-height:1.6;color:var(--ink-2);margin:0}
+.pc[hidden]{display:none}
+/* films */
+.films{padding:88px 0}
+.films__grid{display:grid;gap:30px;margin-top:34px}
+.film{margin:0}
+.film__box{position:relative;border-radius:var(--r);overflow:hidden;background:#111;aspect-ratio:16/9}
+.film video{display:block;width:100%;height:100%;object-fit:cover}
+.film__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:12px;min-height:60px;padding:0 28px;border:0;border-radius:40px;background:var(--gold);color:#111;font:700 15px/1 var(--sans);letter-spacing:.04em;cursor:pointer;box-shadow:0 14px 40px -10px rgba(0,0,0,.6)}
+.film__play span{font-size:18px}
+.film__play[hidden]{display:none}
+.film figcaption{margin-top:14px;text-align:left}
+.film figcaption b{display:block;font-size:17px;color:#fff}
+.film figcaption span{font-size:14px;color:var(--ink-3)}
+/* availability = master plan */
+.mp.avail{padding:88px 0;background:var(--bg-2)}
+.mp.avail .mp__map{max-width:1100px;margin:26px auto 0}
+.mp.avail .mp__pins button{cursor:default}
+.avail__count{font-size:14px;letter-spacing:.08em}
+.avail__count b{font-size:26px}
+.avail__hint{margin:28px 0 0;font-size:16px;color:var(--ink-2)}
+.av{opacity:1!important;transform:none!important}
+.av b{font-size:32px}
+.av span{font-size:14px}
+.av em{font-size:12px;letter-spacing:.06em}
+/* location: static map, golf as a list */
+.where__scene{height:auto!important}
+.where__sticky{position:relative!important;top:auto!important;height:auto!important}
+.where__map{flex:none;height:min(78vh,640px);max-width:1200px;width:calc(100% - 2*var(--g));margin:24px auto 0}
+.where__list li{font-size:16px}
+.golf__t{margin:48px 0 14px;font:700 18px/1.3 var(--sans);letter-spacing:.04em;color:#fff;text-align:center}
+.golf__list{list-style:none;margin:0 auto;padding:0;max-width:900px;display:grid;gap:0 32px}
+.golf__list li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:16px}
+.golf__list b{font-weight:500;color:#fff}
+.golf__list span{color:var(--ink-2);white-space:nowrap;font-size:15px}
+/* payment: plain list */
+.payx{padding:88px 0}
+.payx__list{list-style:none;margin:34px auto 0;padding:0;max-width:640px;text-align:left;counter-reset:p}
+.payx__list li{display:flex;align-items:center;gap:22px;padding:16px 0;border-bottom:1px solid var(--line)}
+.payx__list li::before{counter-increment:p;content:counter(p);flex:0 0 30px;height:30px;border-radius:50%;border:1px solid var(--acc);color:var(--acc);font:600 13px/28px var(--sans);text-align:center}
+.payx__list b{flex:0 0 72px;font:700 28px/1 var(--sans);color:#fff}
+.payx__list b small{font-size:.55em;color:var(--ink-2);margin-left:2px}
+.payx__list span{font-size:16px;color:var(--ink-2)}
+/* how + good */
+.how__steps h3{font-size:16px;letter-spacing:.03em}
+.how__steps p{font-size:15.5px;font-weight:400}
+.how__trust{font-size:15px}
+.good__card li{font-size:16px;line-height:1.6}
+.secure .form label:not(.form__check) span{font-size:13px}
+.secure .form input:not([type=checkbox]),.secure .form select{font-size:17px;min-height:40px}
+.secure .form__check{font-size:14px}
+@media (min-width:700px){
+  .explore__grid{grid-template-columns:repeat(2,1fr);gap:40px 26px}
+  .films__grid{grid-template-columns:3fr 2fr;align-items:start}
+  .golf__list{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1000px){.explore__grid{grid-template-columns:repeat(3,1fr)}}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .js [data-split-fade],.js [data-reveal-tile],.card{opacity:1;transform:none;clip-path:none}
